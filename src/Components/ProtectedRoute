@@ -1,0 +1,21 @@
+import React from 'react';
+import { Navigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../store';
+
+function ProtectedRoute({ children }: { children: React.ReactNode }) {
+  // Grab our authentication state from the central Redux engine
+  const { token } = useSelector(function (state: RootState) {
+    return state.auth;
+  });
+
+  // If there is no token, redirect the user back to the login page
+  if (token === null || token === "") {
+    return <Navigate to="/login" replace />;
+  }
+
+  // If they have a token, render the sub-elements inside a basic layout container
+  return <div className="protected-wrapper">{children}</div>;
+}
+
+export default ProtectedRoute;
