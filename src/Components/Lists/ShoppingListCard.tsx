@@ -1,8 +1,8 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { AppDispatch } from '../../store';
-import { removeShoppingList } from '../../store/slices/shoppingSlice';
-import Button from '../common/Button';
+import { AppDispatch } from '../Store';
+import { removeShoppingList } from '../Store/shoppingSlice';
+import Button from '../Button';
 
 interface ShoppingListCardProps {
   item: {
