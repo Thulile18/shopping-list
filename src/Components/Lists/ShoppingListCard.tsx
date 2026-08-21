@@ -4,14 +4,15 @@ import { removeShoppingList } from '../Store/shoppingSlice';
 import Button from '../Button';
 
 interface ShoppingListCardProps {
-  item: {
-    id: string;
-    name: string;
-    quantity: number;
-    notes: string;
-    category: string;
-    image: string;
-    createdAt: string;
+          item: {
+            id: string;
+          name: string;
+      quantity: number;
+         notes: string;
+      category: string;
+         image: string;
+     createdAt: string;
+    sharedWith: string[];
   };
   onEdit: (item: any) => void;
 }
