@@ -81,7 +81,6 @@ export const shareShoppingList = createAsyncThunk(
 );
 
 export const removeShoppingList = createAsyncThunk(
-export const removeShoppingList = createAsyncThunk(
   'shopping/remove',
   async function (id: string, { rejectWithValue }) {
     try {
