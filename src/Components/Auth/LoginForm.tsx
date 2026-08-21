@@ -1,57 +1,47 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, Link } from 'react-router-dom';
-import { AppDispatch } from '../../store';
-import { loginUser, clearError, selectAuthLoading, selectAuthError } from '../../store/slices/authSlice';
-import Input from '../common/Input';
+import { AppDispatch } from '../Store';
+import { loginUser, clearError, selectAuthLoading, selectAuthError } from '../Store/authSlice';
+import Input from '../Input';
+import Button from '../Button';
 import Button from '../common/Button';
 
 function LoginForm() {
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
-  
-  // Read state parameters from selectors
   const loading = useSelector(selectAuthLoading);
   const error = useSelector(selectAuthError);
-
-  // Set up simple individual variables for each text box input
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [localError, setLocalError] = useState('');
 
-  // Runs when user hits the submission action trigger
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setLocalError('');
 
-    // Explicit validation check for empty string inputs
     if (email === '' || password === '') {
       setLocalError('Please fill in all fields');
       return;
     }
 
-    // Process our dispatch configuration payload
     const resultAction = await dispatch(loginUser({ email: email, password: password }));
     
-    // Evaluate if transactions executed flawlessly
     if (loginUser.fulfilled.match(resultAction)) {
       navigate('/');
     }
   }
 
-  // Clear all tracking logs simultaneously
   function handleCloseError() {
     dispatch(clearError());
     setLocalError('');
   }
 
-  // Figure out what alert messages require mapping display outputs
   const displayError = error || localError || '';
 
   return (
     <div className="login-form-wrapper">
       
-      {/* Show alert banner box modal layer if error parameters drop */}
       {displayError !== '' ? (
         <div className="auth-error">
           <span>{displayError}</span>
