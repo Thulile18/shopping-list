@@ -30,9 +30,9 @@ function App() {
           element={isLoggedIn === true ? <Navigate to="/" replace /> : <Register />}
         />
 
-        <Route
+                <Route
           path="/"
-          element={isLoggedIn === true ? <Home /> : <Navigate to="/login" replace />}
+          element={isLoggedIn === true ? <Home /> : <Landing />}
         />
         <Route
           path="/profile"
