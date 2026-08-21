@@ -7,27 +7,23 @@ import {
   selectSearchTerm,
   selectSortBy,
   selectSortOrder,
-} from '../../store/slices/shoppingSlice';
+} from '../Store/shoppingSlice';
 
 function ShoppingListFilters() {
   const dispatch = useDispatch();
-  
-  // Read current filter options from our central Redux state selectors
+
   const searchTerm = useSelector(selectSearchTerm);
   const sortBy = useSelector(selectSortBy);
   const sortOrder = useSelector(selectSortOrder);
 
-  // Simple handler function to monitor search input box changes
   function handleSearchChange(e: React.ChangeEvent<HTMLInputElement>) {
     dispatch(setSearchTerm(e.target.value));
   }
 
-  // Simple handler function to monitor sorting drop-down selection shifts
   function handleSortChange(e: React.ChangeEvent<HTMLSelectElement>) {
     dispatch(setSortBy(e.target.value));
   }
 
-  // Simple handler function to monitor order selection dropdown changes
   function handleOrderChange(e: React.ChangeEvent<HTMLSelectElement>) {
     dispatch(setSortOrder(e.target.value));
   }
@@ -35,9 +31,8 @@ function ShoppingListFilters() {
   return (
     <div className="filters-bar">
       
-      {/* Dynamic Text Input Box for Filtering Items */}
       <div className="search-box">
-        <span>🔍</span>
+        <span> 🔍 </span>
         <input
           type="text"
           placeholder="Search by name..."
@@ -46,7 +41,6 @@ function ShoppingListFilters() {
         />
       </div>
       
-      {/* Category Sorter Parameter Setup Elements */}
       <div className="filter-group">
         <label>Sort by:</label>
         <select value={sortBy} onChange={handleSortChange}>
@@ -56,7 +50,6 @@ function ShoppingListFilters() {
         </select>
       </div>
       
-      {/* Sequential Direction Arrangement Selection Dropdown Elements */}
       <div className="filter-group">
         <label>Order:</label>
         <select value={sortOrder} onChange={handleOrderChange}>
