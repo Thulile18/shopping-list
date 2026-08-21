@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../Store';
-import { removeShoppingList } from '../Store/shoppingSlice';
+import { removeShoppingList, shareShoppingList } from '../Store/shoppingSlice';
 import Button from '../Button';
 import ShareModal from '../ShareModal';
 
@@ -30,8 +30,12 @@ function ShoppingListCard({ item, onEdit }: ShoppingListCardProps) {
     }
   }
   
-  function handleEditClick() {
+    function handleEditClick() {
     onEdit(item);
+  }
+
+  function handleShareEmail(email: string) {
+    dispatch(shareShoppingList({ id: item.id, email: email, currentSharedWith: item.sharedWith }));
   }
 
   return (
@@ -63,13 +67,14 @@ function ShoppingListCard({ item, onEdit }: ShoppingListCardProps) {
         </Button>
       </div>
 
-      <ShareModal
-        isOpen={isShareOpen}
-        onClose={function () { setIsShareOpen(false); }}
-        listId={item.id}
-        listName={item.name}
-        sharedWith={item.sharedWith}
-      />
+            <ShareModal
+               isOpen={isShareOpen}
+               onClose={function () { setIsShareOpen(false); }}
+               listId={item.id}
+            listName={item.name}
+           sharedWith={item.sharedWith}
+          onShareEmail={handleShareEmail}
+       />
     </div>
   );
 }
