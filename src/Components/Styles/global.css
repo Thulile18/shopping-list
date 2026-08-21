@@ -1,6 +1,3 @@
-/* ==========================================
-   1. RESET AND BASE STYLES
-   ========================================== */
 * {
   margin: 0;
   padding: 0;
@@ -34,9 +31,6 @@ textarea {
   outline: none;
 }
 
-/* ==========================================
-   2. APP CONTAINER LAYOUTS
-   ========================================== */
 .container {
   max-width: 1100px;
   margin: 0 auto;
@@ -48,9 +42,6 @@ textarea {
   min-height: 100vh;
 }
 
-/* ==========================================
-   3. BUTTON COMPONENTS
-   ========================================== */
 .btn {
   padding: 10px 20px;
   border-radius: 6px;
@@ -91,9 +82,6 @@ textarea {
   width: 100%;
 }
 
-/* ==========================================
-   4. FORM GROUPS AND INPUTS
-   ========================================== */
 .form-group {
   margin-bottom: 15px;
 }
@@ -130,9 +118,6 @@ textarea {
   margin-top: 5px;
 }
 
-/* ==========================================
-   5. GENERAL CONTAINERS AND CARDS
-   ========================================== */
 .card {
   background: white;
   border-radius: 8px;
@@ -154,9 +139,6 @@ textarea {
   color: #1a1a2e;
 }
 
-/* ==========================================
-   6. AUTHENTICATION SCREENS
-   ========================================== */
 .auth-page {
   min-height: 90vh;
   display: flex;
@@ -220,9 +202,6 @@ textarea {
   align-items: center;
 }
 
-/* ==========================================
-   7. TOP NAVIGATION BAR
-   ========================================== */
 .navbar {
   background: white;
   border-bottom: 1px solid #e2e8f0;
@@ -274,9 +253,6 @@ textarea {
   font-weight: bold;
 }
 
-/* ==========================================
-   8. SHOPPING LIST ELEMENT GRIDS
-   ========================================== */
 .list-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
@@ -323,9 +299,6 @@ textarea {
   margin-top: 10px;
 }
 
-/* ==========================================
-   9. SEARCH AND SORT FILTERS STRIP
-   ========================================== */
 .filters-bar {
   display: flex;
   gap: 15px;
@@ -368,9 +341,6 @@ textarea {
   border-color: #4361ee;
 }
 
-/* ==========================================
-   10. INTERFACE DIALOG MODAL POPUPS
-   ========================================== */
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -421,9 +391,6 @@ textarea {
   color: #1a1a2e;
 }
 
-/* ==========================================
-   11. PROFILE MANAGEMENT VIEW HOOKS
-   ========================================== */
 .profile-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -456,9 +423,6 @@ textarea {
   margin-bottom: 20px;
 }
 
-/* ==========================================
-   12. LOADING AND EMPTY CONTAINER VIEWS
-   ========================================== */
 .empty-state {
   text-align: center;
   padding: 40px;
@@ -477,9 +441,6 @@ textarea {
   color: #718096;
 }
 
-/* ==========================================
-   13. EXPLICIT INTERFACE TEXT HEADERS
-   ========================================== */
 .page-header {
   display: flex;
   justify-content: space-between;
@@ -493,9 +454,6 @@ textarea {
   color: #1a1a2e;
 }
 
-/* ==========================================
-   14. STANDALONE TOOL ELEMENT UTILITIES
-   ========================================== */
 .text-center { text-align: center; }
 .text-muted { color: #718096; }
 .w-full { width: 100%; }
@@ -533,9 +491,24 @@ textarea {
   height: 100%;
 }
 
-/* ==========================================
-   15. STANDALONE RESPONSIVE MEDIA QUERIES
-   ========================================== */
+@media (max-width: 1200px) {
+  .container {
+    padding: 15px;
+  }
+  .list-grid {
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  }
+}
+
+@media (max-width: 1024px) {
+  .profile-grid {
+    gap: 20px;
+  }
+  .list-grid {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  }
+}
+
 @media (max-width: 768px) {
   .profile-grid {
     grid-template-columns: 1fr;
@@ -550,5 +523,41 @@ textarea {
   .filters-bar {
     flex-direction: column;
     align-items: stretch;
+  }
+}
+
+@media (max-width: 480px) {
+  .auth-card {
+    padding: 20px;
+  }
+  .card {
+    padding: 15px;
+  }
+  .modal-box {
+    padding: 20px;
+  }
+  .page-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  .btn-block-sm {
+    width: 100%;
+  }
+}
+
+@media (max-width: 320px) {
+  .auth-card h2 {
+    font-size: 20px;
+  }
+  .card-title {
+    font-size: 16px;
+  }
+  .navbar .brand {
+    font-size: 18px;
+  }
+  .btn {
+    padding: 8px 14px;
+    font-size: 13px;
   }
 }
