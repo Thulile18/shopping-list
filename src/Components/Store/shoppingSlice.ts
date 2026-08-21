@@ -34,14 +34,15 @@ export const addShoppingList = createAsyncThunk(
   async function ({ userId, data }: { userId: string; data: ShoppingListInput }, { rejectWithValue }) {
     try {
     
-      const newItem = {
-        userId: userId,
-        name: data.name,
-        quantity: data.quantity,
-        notes: data.notes,
-        category: data.category,
-        image: data.image,
-        createdAt: new Date().toISOString(),
+         const newItem = {
+             userId: userId,
+               name: data.name,
+           quantity: data.quantity,
+              notes: data.notes,
+           category: data.category,
+              image: data.image,
+          createdAt: new Date().toISOString(),
+         sharedWith: data.sharedWith,
       };
       const response = await createShoppingList(newItem);
       return response.data as ShoppingList;
@@ -62,7 +63,24 @@ export const editShoppingList = createAsyncThunk(
     }
   }
 );
+export const shareShoppingList = createAsyncThunk(
+  'shopping/share',
+  async function ({ id, email, currentSharedWith }: { id: string; email: string; currentSharedWith: string[] }, { rejectWithValue }) {
+    try {
+    
+      if (currentSharedWith.includes(email)) {
+        return rejectWithValue('Already shared with this email');
+      }
+      const updatedSharedWith = [...currentSharedWith, email];
+      const response = await updateShoppingList(id, { sharedWith: updatedSharedWith });
+      return response.data as ShoppingList;
+    } catch (error: any) {
+      return rejectWithValue(error.message || 'Failed to share item');
+    }
+  }
+);
 
+export const removeShoppingList = createAsyncThunk(
 export const removeShoppingList = createAsyncThunk(
   'shopping/remove',
   async function (id: string, { rejectWithValue }) {
