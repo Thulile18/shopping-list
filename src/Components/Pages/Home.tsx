@@ -1,4 +1,3 @@
-import React, { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { selectUser } from '../Store/authSlice';
