@@ -1,4 +1,3 @@
-import React from 'react';
 import AuthCard from '../AuthCard';
 import RegisterForm from '../Auth/RegistrationForm';
 
