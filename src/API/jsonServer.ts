@@ -1,18 +1,12 @@
 import axios from 'axios';
 
-const API_BASE = 'http://localhost:5000';
-
-// Set up our primary configuration instance for our API communications
+const API_BASE = import.meta.env.VITE_API_BASE_URL;
 export const api = axios.create({
   baseURL: API_BASE,
   headers: {
     'Content-Type': 'application/json',
   },
 });
-
-// ==========================================
-// 1. USER BACKEND REQUESTS
-// ==========================================
 
 export function getUsers() {
   return api.get('/users');
@@ -33,10 +27,6 @@ export function updateUser(id: string, data: any) {
 export function deleteUser(id: string) {
   return api.delete('/users/' + id);
 }
-
-// ==========================================
-// 2. SHOPPING LIST BACKEND REQUESTS
-// ==========================================
 
 export function getShoppingLists() {
   return api.get('/shoppingLists');
@@ -62,5 +52,4 @@ export function getShoppingListsByUser(userId: string) {
   return api.get('/shoppingLists?userId=' + userId);
 }
 
-// Export our main connection engine instance at the absolute bottom
 export default api;
