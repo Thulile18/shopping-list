@@ -34,12 +34,13 @@ export function useShoppingLists(userId?: string) {
     }
   }, [userId, dispatch]);
 
-  async function addItem(data: {
-    name: string;
-    quantity: number;
-    notes: string;
-    category: string;
-    image: string;
+    async function addItem(data: {
+            name: string;
+        quantity: number;
+           notes: string;
+        category: string;
+           image: string;
+      sharedWith: string[];
   }) {
     if (!userId) {
       return { success: false, error: 'No user ID' };
