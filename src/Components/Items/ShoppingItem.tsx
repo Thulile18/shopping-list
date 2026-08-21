@@ -1,10 +1,9 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { AppDispatch } from '../../store';
-import { removeShoppingList } from '../../store/slices/shoppingSlice';
-import Button from '../common/Button';
+import { AppDispatch } from '../Store';
+import { removeShoppingList } from '../Store/shoppingSlice';
+import Button from '../Button';
 
-// Simple interface to layout our component parameter definitions
 interface ShoppingItemProps {
   item: {
     id: string;
@@ -21,7 +20,6 @@ interface ShoppingItemProps {
 function ShoppingItem({ item, onEdit }: ShoppingItemProps) {
   const dispatch = useDispatch<AppDispatch>();
 
-  // Explicit handler function to process item removal safely
   async function handleDelete() {
     const confirmation = window.confirm('Delete this item?');
     if (confirmation === true) {
@@ -29,39 +27,33 @@ function ShoppingItem({ item, onEdit }: ShoppingItemProps) {
     }
   }
 
-  // Explicit handler function to pass the edit payload back up to parent container
   function handleEditClick() {
     onEdit(item);
   }
 
   return (
     <div className="list-item-card">
-      {/* Item title display text */}
       <div className="item-name">{item.name}</div>
       
-      {/* Structural metadata strip displaying inventory count and categories */}
       <div className="item-meta">
-        <span>📦 Qty: {item.quantity}</span>
+        <span> Qty: {item.quantity}</span>
         <span className="tag" style={{ marginLeft: '10px' }}>{item.category}</span>
       </div>
       
-      {/* Render descriptions conditionally if item contains optional text */}
       {item.notes ? (
         <div className="item-notes" style={{ marginTop: '5px' }}>📝 {item.notes}</div>
       ) : null}
-      
-      {/* Render optional item picture asset panel checks safely */}
+    
       {item.image ? (
         <img src={item.image} alt={item.name} className="item-image" />
       ) : null}
       
-      {/* Card action management triggers interface layout panel */}
       <div className="item-actions" style={{ marginTop: '15px', display: 'flex', gap: '10px' }}>
         <Button variant="warning" size="sm" onClick={handleEditClick}>
-          ✏️ Edit
+            Edit
         </Button>
         <Button variant="danger" size="sm" onClick={handleDelete}>
-          🗑️ Delete
+            Delete
         </Button>
       </div>
     </div>
