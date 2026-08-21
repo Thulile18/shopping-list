@@ -157,6 +157,17 @@ const shoppingSlice = createSlice({
         state.error = action.payload as string;
       })
       
+      .addCase(shareShoppingList.fulfilled, function (state, action) {
+        for (let i = 0; i < state.items.length; i = i + 1) {
+          if (state.items[i].id === action.payload.id) {
+            state.items[i] = action.payload;
+          }
+        }
+      })
+      .addCase(shareShoppingList.rejected, function (state, action) {
+        state.error = action.payload as string;
+      })
+      
       .addCase(removeShoppingList.pending, function (state) {
         state.loading = true;
         state.error = null;
