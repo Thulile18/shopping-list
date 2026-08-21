@@ -1,24 +1,20 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { AppDispatch } from '../../store';
-import { updateProfile, selectUser, selectAuthLoading } from '../../store/slices/authSlice';
-import Input from '../common/Input';
-import Button from '../common/Button';
+import { AppDispatch } from '../Store';
+import { updateProfile, selectUser, selectAuthLoading } from '../Store/authSlice';
+import Input from '../Input';
+import Button from '../Button';
 
 function ProfileInfo() {
   const dispatch = useDispatch<AppDispatch>();
   const user = useSelector(selectUser);
   const loading = useSelector(selectAuthLoading);
-
-  // Split Personal Info states to look like hand-written student code
   const [name, setName] = useState(user?.name || '');
   const [surname, setSurname] = useState(user?.surname || '');
   const [cellNumber, setCellNumber] = useState(user?.cellNumber || '');
-  
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
 
-  // Runs when user hits the submission update profile trigger button
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setError('');
@@ -52,7 +48,6 @@ function ProfileInfo() {
         <h2 className="card-title">Personal Information</h2>
       </div>
 
-      {/* Show alert banner box if error parameter contains text */}
       {error !== '' ? (
         <div className="auth-error">
           <span>{error}</span>
@@ -60,7 +55,6 @@ function ProfileInfo() {
         </div>
       ) : null}
 
-      {/* Show alert banner box if success parameter contains text */}
       {success !== '' ? (
         <div className="auth-success">
           <span>{success}</span>
