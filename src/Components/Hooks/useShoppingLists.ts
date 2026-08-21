@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { AppDispatch } from '../store';
+import { AppDispatch } from '../Store';
 import {
   fetchUserLists,
   addShoppingList,
@@ -16,12 +16,10 @@ import {
   selectSortBy,
   selectSortOrder,
   selectFilteredItems,
-} from '../store/slices/shoppingSlice';
+} from '../Store/shoppingSlice';
 
 export function useShoppingLists(userId?: string) {
   const dispatch = useDispatch<AppDispatch>();
-  
-  // Read our shopping metrics from selectors
   const items = useSelector(selectItems);
   const loading = useSelector(selectLoading);
   const error = useSelector(selectError);
@@ -30,14 +28,12 @@ export function useShoppingLists(userId?: string) {
   const sortOrder = useSelector(selectSortOrder);
   const filteredItems = useSelector(selectFilteredItems);
 
-  // Automatically pull inventory values down from server when user ID loads
   useEffect(function () {
     if (userId) {
       dispatch(fetchUserLists(userId));
     }
   }, [userId, dispatch]);
 
-  // Handler function to dispatch item creations
   async function addItem(data: {
     name: string;
     quantity: number;
@@ -58,7 +54,6 @@ export function useShoppingLists(userId?: string) {
     }
   }
 
-  // Handler function to dispatch item variations
   async function editItem(id: string, data: Partial<{
     name: string;
     quantity: number;
@@ -75,7 +70,6 @@ export function useShoppingLists(userId?: string) {
     }
   }
 
-  // Handler function to dispatch deletions
   async function deleteItem(id: string) {
     const resultAction = await dispatch(removeShoppingList(id));
     
@@ -85,23 +79,18 @@ export function useShoppingLists(userId?: string) {
       return { success: false, error: error };
     }
   }
-
-  // Helper trigger to pipe query tracking values to store
   function search(term: string) {
     dispatch(setSearchTerm(term));
   }
 
-  // Helper trigger to pipe category sorting values to store
   function sort(by: string) {
     dispatch(setSortBy(by));
   }
-
-  // Helper trigger to pipe directional arrangement choices to store
+  
   function setOrder(order: string) {
     dispatch(setSortOrder(order));
   }
 
-  // Return state maps and transactional parameters cleanly inside an object structure
   return {
     items: items,
     filteredItems: filteredItems,
