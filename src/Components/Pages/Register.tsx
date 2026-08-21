@@ -1,13 +1,13 @@
 import React from 'react';
-import AuthCard from '../components/common/AuthCard';
-import RegisterForm from '../components/auth/RegisterForm';
+import AuthCard from '../AuthCard';
+import RegisterForm from '../Auth/RegistrationForm';
 
 function Register() {
   return (
     <div className="auth-page">
-      {/* Structural layout card passing display header settings dynamically */}
+
       <AuthCard title="Create Account" subtitle="Start managing your shopping lists today">
-        {/* Render our modular user form layout box nested inside the card wrapper */}
+       
         <RegisterForm />
       </AuthCard>
     </div>
