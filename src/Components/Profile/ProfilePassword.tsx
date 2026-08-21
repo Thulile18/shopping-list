@@ -1,42 +1,35 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { AppDispatch } from '../../store';
-import { updatePassword, selectUser, selectAuthLoading } from '../../store/slices/authSlice';
-import Input from '../common/Input';
-import Button from '../common/Button';
+import { AppDispatch } from '../Store';
+import { updatePassword, selectUser, selectAuthLoading } from '../Store/authSlice';
+import Input from '../Input';
+import Button from '../Button';
 
 function ProfilePassword() {
   const dispatch = useDispatch<AppDispatch>();
   const user = useSelector(selectUser);
-  const loading = useSelector(selectAuthLoading);
-
-  // Split password form states to look like hand-written student code
+  const loading = useSelector(selectAuthLoading)
   const [currentPassword, setCurrentPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
 
-  // Runs when user hits the submission change password trigger button
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setError('');
     setSuccess('');
 
-    // Explicit validation check for empty string inputs
     if (currentPassword === '' || newPassword === '' || confirmPassword === '') {
       setError('Please fill in all fields');
       return;
     }
     
-    // Validation check to make sure both passwords match exactly
     if (newPassword !== confirmPassword) {
       setError('New passwords do not match');
       return;
     }
     
-    // Validation check to make sure password length meets criteria
     if (newPassword.length < 6) {
       setError('Password must be at least 6 characters');
       return;
@@ -69,7 +62,6 @@ function ProfilePassword() {
         <h2 className="card-title">Change Password</h2>
       </div>
 
-      {/* Show alert banner box if error parameter contains text */}
       {error !== '' ? (
         <div className="auth-error">
           <span>{error}</span>
@@ -77,7 +69,6 @@ function ProfilePassword() {
         </div>
       ) : null}
 
-      {/* Show alert banner box if success parameter contains text */}
       {success !== '' ? (
         <div className="auth-success">
           <span>{success}</span>
