@@ -15,6 +15,7 @@ const initialState: ShoppingState = {
   searchTerm: '',
   sortBy: 'createdAt',
   sortOrder: 'desc',
+};
 
 export const fetchUserLists = createAsyncThunk(
   'shopping/fetchUserLists',
