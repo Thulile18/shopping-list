@@ -45,12 +45,13 @@ function ShoppingItemForm({ isOpen, onClose, editingItem, userId }: ShoppingItem
       return;
     }
 
-    const data = {
-      name: name.trim(),
-      quantity: Number(quantity) || 1,
-      notes: notes.trim(),
-      category: category,
-      image: image.trim(),
+        const data = {
+               name: name.trim(),
+           quantity: Number(quantity) || 1,
+              notes: notes.trim(),
+           category: category,
+              image: image.trim(),
+         sharedWith: editingItem ? editingItem.sharedWith : [],
     };
 
     if (editingItem) {
