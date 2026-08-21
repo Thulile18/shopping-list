@@ -5,7 +5,7 @@ import {
   createShoppingList,
   updateShoppingList,
   deleteShoppingList,
-} from '../API/jsonServer';
+} from '../../API/jsonServer';
 import { RootState } from './index';
 
 const initialState: ShoppingState = {
@@ -15,11 +15,6 @@ const initialState: ShoppingState = {
   searchTerm: '',
   sortBy: 'createdAt',
   sortOrder: 'desc',
-};
-
-// ==========================================
-// ASYNC THUNKS (SERVER TRANSACTIONS)
-// ==========================================
 
 export const fetchUserLists = createAsyncThunk(
   'shopping/fetchUserLists',
@@ -37,7 +32,7 @@ export const addShoppingList = createAsyncThunk(
   'shopping/add',
   async function ({ userId, data }: { userId: string; data: ShoppingListInput }, { rejectWithValue }) {
     try {
-      // Explicit manual assignment replaces the advanced Omit type mapping
+    
       const newItem = {
         userId: userId,
         name: data.name,
@@ -79,10 +74,6 @@ export const removeShoppingList = createAsyncThunk(
   }
 );
 
-// ==========================================
-// THE SHOPPING LIST REDUX SLICE
-// ==========================================
-
 const shoppingSlice = createSlice({
   name: 'shopping',
   initialState: initialState,
@@ -102,7 +93,7 @@ const shoppingSlice = createSlice({
   },
   extraReducers: function (builder) {
     builder
-      // FETCH ARRAY LOGS
+      
       .addCase(fetchUserLists.pending, function (state) {
         state.loading = true;
         state.error = null;
@@ -116,7 +107,6 @@ const shoppingSlice = createSlice({
         state.error = action.payload as string;
       })
       
-      // INSERT ITEMS LOGS
       .addCase(addShoppingList.pending, function (state) {
         state.loading = true;
         state.error = null;
@@ -130,7 +120,6 @@ const shoppingSlice = createSlice({
         state.error = action.payload as string;
       })
       
-      // MODIFY ENTRIES LOGS
       .addCase(editShoppingList.pending, function (state) {
         state.loading = true;
         state.error = null;
@@ -138,7 +127,6 @@ const shoppingSlice = createSlice({
       .addCase(editShoppingList.fulfilled, function (state, action) {
         state.loading = false;
         
-        // Clean traditional loop replaces the abstract .findIndex expression
         for (let i = 0; i < state.items.length; i = i + 1) {
           if (state.items[i].id === action.payload.id) {
             state.items[i] = action.payload;
@@ -150,7 +138,6 @@ const shoppingSlice = createSlice({
         state.error = action.payload as string;
       })
       
-      // DELETION LOGS
       .addCase(removeShoppingList.pending, function (state) {
         state.loading = true;
         state.error = null;
@@ -158,7 +145,6 @@ const shoppingSlice = createSlice({
       .addCase(removeShoppingList.fulfilled, function (state, action) {
         state.loading = false;
         
-        // Manual filter array recreation mimics hand-written beginner student style
         const freshItemsList: ShoppingList[] = [];
         for (let j = 0; j < state.items.length; j = j + 1) {
           if (state.items[j].id !== action.payload) {
@@ -175,10 +161,6 @@ const shoppingSlice = createSlice({
 });
 
 export const { setSearchTerm, setSortBy, setSortOrder, clearError } = shoppingSlice.actions;
-
-// ==========================================
-// CENTRAL STATE SELECTORS
-// ==========================================
 
 export function selectShopping(state: RootState) {
   return state.shopping;
@@ -208,21 +190,18 @@ export function selectSortOrder(state: RootState) {
   return state.shopping.sortOrder;
 }
 
-// Complete student-style filtering selector function
 export function selectFilteredItems(state: RootState) {
   const items = state.shopping.items;
   const searchTerm = state.shopping.searchTerm;
   const sortBy = state.shopping.sortBy;
   const sortOrder = state.shopping.sortOrder;
   
-  // 1. Filter items step-by-step using a plain anonymous function
   const filtered = items.filter(function (item) {
     const regularName = item.name.toLowerCase();
     const lookForName = searchTerm.toLowerCase();
     return regularName.includes(lookForName);
   });
   
-  // 2. Sort items explicitly using sequential comparisons
   filtered.sort(function (a, b) {
     let comparison = 0;
     if (sortBy === 'name') {
