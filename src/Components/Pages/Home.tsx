@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { selectUser } from '../store/slices/authSlice';
-import { useShoppingLists } from '../hooks/useShoppingLists';
-import Button from '../components/common/Button';
-import PageLayout from '../components/common/PageLayout';
-import ShoppingListFilters from '../components/lists/ShoppingListFilters';
-import ShoppingItem from '../components/items/ShoppingItem';
-import ShoppingItemForm from '../components/items/ShoppingItemForm';
+import { selectUser } from '../Store/authSlice';
+import { useShoppingLists } from '../Hooks/useShoppingLists';
+import Button from '../Button';
+import PageLayout from '../PageLayout';
+import ShoppingListFilters from '../Lists/ShoppingListFilters';
+import ShoppingItem from '../Items/ShoppingItem';
+import ShoppingItemForm from '../Items/ShoppingItemForm';
 
 function Home() {
   const user = useSelector(selectUser);
@@ -15,11 +15,9 @@ function Home() {
   const [showModal, setShowModal] = useState(false);
   const [editingItem, setEditingItem] = useState<any>(null);
 
-  // Pull functions and arrays straight out of our custom hooks
   const { filteredItems, loading, searchTerm, search, sort, setOrder } =
     useShoppingLists(user?.id);
 
-  // Sync address query parameters straight to local helper functions
   useEffect(function () {
     const searchParam = searchParams.get('search') || '';
     const sortParam = searchParams.get('sort') || 'createdAt';
@@ -33,25 +31,21 @@ function Home() {
     setOrder(orderParam);
   }, [searchParams]);
 
-  // Handle open actions for adding items
   function openAddModal() {
     setEditingItem(null);
     setShowModal(true);
   }
 
-  // Handle open actions for editing items
   function openEditModal(item: any) {
     setEditingItem(item);
     setShowModal(true);
   }
 
-  // Handle closed actions for the popup window
   function closeModal() {
     setShowModal(false);
     setEditingItem(null);
   }
 
-  // Stop page construction if no profile data exists
   if (user === null || user === undefined) {
     return (
       <div className="container" style={{ padding: '3rem', textAlign: 'center' }}>
@@ -69,14 +63,12 @@ function Home() {
         </Button>
       </div>
 
-      {/* Render sub-component handling input fields filter row */}
       <ShoppingListFilters />
 
       <p style={{ margin: '10px 0', color: '#718096' }}>
         Total: {filteredItems.length} items found
       </p>
 
-      {/* Primary list view loading condition blocks */}
       {loading === true ? (
         <div style={{ textAlign: 'center', padding: '20px' }}>Loading...</div>
       ) : filteredItems.length === 0 ? (
@@ -101,7 +93,6 @@ function Home() {
         </div>
       )}
 
-      {/* Floating item form modal layer layout block */}
       <ShoppingItemForm
         isOpen={showModal}
         onClose={closeModal}
