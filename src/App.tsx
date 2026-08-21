@@ -6,6 +6,7 @@ import Login from './Components/Pages/Login';
 import Register from './Components/Pages/Register';
 import Home from './Components/Pages/Home';
 import Profile from './Components/Pages/Profile';
+import SharedList from './Components/Pages/SharedList';
 
 function App() {
   const { token } = useSelector(function (state: RootState) {
@@ -20,16 +21,10 @@ function App() {
       
       <Routes>
         
-               <Route
-          path="/profile"
-          element={isLoggedIn === true ? <Profile /> : <Navigate to="/login" replace />}
+        <Route
+          path="/login"
+          element={isLoggedIn === true ? <Navigate to="/" replace /> : <Login />}
         />
-
-        <Route path="/shared/:id" element={<SharedList />} />
-
-        <Route path="*" element={<Navigate to="/" replace />} />
-        />
-       
         <Route
           path="/register"
           element={isLoggedIn === true ? <Navigate to="/" replace /> : <Register />}
@@ -38,11 +33,13 @@ function App() {
         <Route
           path="/"
           element={isLoggedIn === true ? <Home /> : <Navigate to="/login" replace />}
-       />
+        />
         <Route
           path="/profile"
           element={isLoggedIn === true ? <Profile /> : <Navigate to="/login" replace />}
         />
+
+        <Route path="/shared/:id" element={<SharedList />} />
 
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
