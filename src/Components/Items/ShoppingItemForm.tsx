@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { AppDispatch } from '../../store';
-import { addShoppingList, editShoppingList } from '../../store/slices/shoppingSlice';
-import Button from '../common/Button';
-import Input from '../common/Input';
+import { useDispatch } from 'react-import { AppDispatch } from '../Store';
+import { addShoppingList, editShoppingList } from '../Store/shoppingSlice';
+import Button from '../Button';
+import Input from '../Input';
 
-// Define the interface props clearly
 interface ShoppingItemFormProps {
   isOpen: boolean;
   onClose: () => void;
@@ -16,15 +14,12 @@ interface ShoppingItemFormProps {
 function ShoppingItemForm({ isOpen, onClose, editingItem, userId }: ShoppingItemFormProps) {
   const dispatch = useDispatch<AppDispatch>();
   const categories = ['Groceries', 'Electronics', 'Clothing', 'Home', 'Health', 'Other'];
-
-  // Split form state into easy-to-read separate primitive hook variables
   const [name, setName] = useState('');
   const [quantity, setQuantity] = useState(1);
   const [notes, setNotes] = useState('');
   const [category, setCategory] = useState('Groceries');
   const [image, setImage] = useState('');
 
-  // Update or reset input boxes when editingItem changes
   useEffect(function () {
     if (editingItem !== null && editingItem !== undefined) {
       setName(editingItem.name);
@@ -41,7 +36,6 @@ function ShoppingItemForm({ isOpen, onClose, editingItem, userId }: ShoppingItem
     }
   }, [editingItem]);
 
-  // Handle form save operations
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
 
@@ -71,7 +65,6 @@ function ShoppingItemForm({ isOpen, onClose, editingItem, userId }: ShoppingItem
     }
   }
 
-  // If the popup modal is closed, don't show any HTML layout at all
   if (isOpen === false) {
     return null;
   }
