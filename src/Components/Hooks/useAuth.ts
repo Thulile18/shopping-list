@@ -50,9 +50,9 @@ export function useAuth() {
     }
   }
 
-  function logoutUser() {
+    function logoutUser() {
     dispatch(logout());
-    navigate('/login');
+    navigate('/');
   }
 
   function clearAuthError() {
