@@ -1,9 +1,9 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { selectUser } from '../store/slices/authSlice';
-import PageLayout from '../components/common/PageLayout';
-import ProfileInfo from '../components/profile/ProfileInfo';
-import ProfilePassword from '../components/profile/ProfilePassword';
+import { selectUser } from '../Store/authSlice';
+import PageLayout from '../PageLayout';
+import ProfileInfo from '../Profile/ProfileInfo';
+import ProfilePassword from '../Profile/ProfilePassword';
 
 const Profile: React.FC = () => {
   const user = useSelector(selectUser);
