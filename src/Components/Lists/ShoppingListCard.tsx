@@ -1,7 +1,9 @@
+import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../Store';
 import { removeShoppingList } from '../Store/shoppingSlice';
 import Button from '../Button';
+import ShareModal from '../ShareModal';
 
 interface ShoppingListCardProps {
           item: {
@@ -19,6 +21,7 @@ interface ShoppingListCardProps {
 
 function ShoppingListCard({ item, onEdit }: ShoppingListCardProps) {
   const dispatch = useDispatch<AppDispatch>();
+  const [isShareOpen, setIsShareOpen] = useState(false);
 
   async function handleDelete() {
     const confirmation = window.confirm('Delete this item?');
@@ -48,14 +51,25 @@ function ShoppingListCard({ item, onEdit }: ShoppingListCardProps) {
         <img src={item.image} alt={item.name} className="item-image" />
       ) : null}
       
-      <div className="item-actions" style={{ marginTop: '15px', display: 'flex', gap: '10px' }}>
+            <div className="item-actions" style={{ marginTop: '15px', display: 'flex', gap: '10px' }}>
         <Button variant="warning" size="sm" onClick={handleEditClick}>
            Edit
+        </Button>
+        <Button variant="outline" size="sm" onClick={function () { setIsShareOpen(true); }}>
+           Share
         </Button>
         <Button variant="danger" size="sm" onClick={handleDelete}>
            Delete
         </Button>
       </div>
+
+      <ShareModal
+        isOpen={isShareOpen}
+        onClose={function () { setIsShareOpen(false); }}
+        listId={item.id}
+        listName={item.name}
+        sharedWith={item.sharedWith}
+      />
     </div>
   );
 }
