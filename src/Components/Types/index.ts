@@ -16,6 +16,7 @@ export interface ShoppingList {
   category: string;
   image: string;
   createdAt: string;
+  sharedWith: string[];
 }
 
 export interface AuthState {
@@ -53,4 +54,5 @@ export interface ShoppingListInput {
   notes: string;
   category: string;
   image: string;
+  sharedWith: string[];
 }
