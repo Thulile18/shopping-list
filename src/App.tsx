@@ -7,6 +7,7 @@ import Register from './Components/Pages/Register';
 import Home from './Components/Pages/Home';
 import Profile from './Components/Pages/Profile';
 import SharedList from './Components/Pages/SharedList';
+import Landing from './Components/Pages/Landing';
 
 function App() {
   const { token } = useSelector(function (state: RootState) {
