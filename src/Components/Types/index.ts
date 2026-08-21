@@ -1,7 +1,3 @@
-// ==========================================
-// 1. DATA OBJECT SCHEMAS
-// ==========================================
-
 export interface User {
   id: string;
   email: string;
@@ -22,10 +18,6 @@ export interface ShoppingList {
   createdAt: string;
 }
 
-// ==========================================
-// 2. REDUX STATE SCHEMAS
-// ==========================================
-
 export interface AuthState {
   user: User | null;
   token: string | null;
@@ -38,13 +30,9 @@ export interface ShoppingState {
   loading: boolean;
   error: string | null;
   searchTerm: string;
-  sortBy: string;      // Simplified from restrictive union literals to look like student code
-  sortOrder: string;   // Simplified from restrictive union literals to look like student code
+  sortBy: string;     
+  sortOrder: string;   
 }
-
-// ==========================================
-// 3. API TRANSMISSION INPUT SCHEMAS
-// ==========================================
 
 export interface LoginCredentials {
   email: string;
