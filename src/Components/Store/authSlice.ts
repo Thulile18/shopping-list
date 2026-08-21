@@ -1,8 +1,8 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
-import { AuthState, User, LoginCredentials, RegisterData } from '../../types';
-import { encrypt, decrypt } from '../../utils/encryption';
-import { getUsers, createUser, updateUser } from '../../api/jsonServer';
-import { RootState } from '../index';
+import { AuthState, User, LoginCredentials, RegisterData } from '../Types';
+import { encrypt, decrypt } from '../Utils/encryption';
+import { getUsers, createUser, updateUser } from '../../API/jsonServer';
+import { RootState } from './index';
 
 const initialState: AuthState = {
   user: null,
@@ -11,12 +11,10 @@ const initialState: AuthState = {
   error: null,
 };
 
-// Helper function to scan our database array for a specific email address
 async function findUserByEmail(email: string): Promise<User | null> {
   const response = await getUsers();
   const users = response.data as User[];
   
-  // Clean student-style loop to look up matching items manually
   for (let i = 0; i < users.length; i = i + 1) {
     if (users[i].email === email) {
       return users[i];
@@ -24,10 +22,6 @@ async function findUserByEmail(email: string): Promise<User | null> {
   }
   return null;
 }
-
-// ==========================================
-// ASYNC THUNKS (SERVER TRANSACTIONS)
-// ==========================================
 
 export const loginUser = createAsyncThunk(
   'auth/login',
@@ -43,7 +37,6 @@ export const loginUser = createAsyncThunk(
         return rejectWithValue('Invalid password');
       }
 
-      // Generate a dynamic timestamped base64 string token
       const token = btoa(user.id + ':' + Date.now());
       localStorage.setItem('shopping_token', token);
       
@@ -65,7 +58,6 @@ export const registerUser = createAsyncThunk(
 
       const encryptedPassword = encrypt(data.password);
       
-      // Explicit manual assignment replaces the advanced Omit type mapping
       const newUser = {
         email: data.email,
         password: encryptedPassword,
@@ -112,10 +104,6 @@ export const updatePassword = createAsyncThunk(
   }
 );
 
-// ==========================================
-// THE DATA AUTHENTICATION SLICE
-// ==========================================
-
 const authSlice = createSlice({
   name: 'auth',
   initialState: initialState,
@@ -132,7 +120,7 @@ const authSlice = createSlice({
   },
   extraReducers: function (builder) {
     builder
-      // LOGIN TRIGGERS
+    
       .addCase(loginUser.pending, function (state) {
         state.loading = true;
         state.error = null;
@@ -147,7 +135,6 @@ const authSlice = createSlice({
         state.error = action.payload as string;
       })
       
-      // REGISTRATION TRIGGERS
       .addCase(registerUser.pending, function (state) {
         state.loading = true;
         state.error = null;
@@ -162,7 +149,6 @@ const authSlice = createSlice({
         state.error = action.payload as string;
       })
       
-      // PROFILE DETAILS UPDATE TRIGGERS
       .addCase(updateProfile.pending, function (state) {
         state.loading = true;
         state.error = null;
@@ -178,7 +164,6 @@ const authSlice = createSlice({
         state.error = action.payload as string;
       })
       
-      // PASSWORD CHANGE TRIGGERS
       .addCase(updatePassword.pending, function (state) {
         state.loading = true;
         state.error = null;
@@ -197,10 +182,6 @@ const authSlice = createSlice({
 });
 
 export const { logout, clearError } = authSlice.actions;
-
-// ==========================================
-// CENTRAL STATE SELECTORS
-// ==========================================
 
 export function selectAuth(state: RootState) {
   return state.auth;
