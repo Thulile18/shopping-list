@@ -1,53 +1,44 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, Link } from 'react-router-dom';
-import { AppDispatch } from '../../store';
-import { registerUser, clearError, selectAuthLoading, selectAuthError } from '../../store/slices/authSlice';
-import Input from '../common/Input';
-import Button from '../common/Button';
+import { AppDispatch } from '../Store';
+import { registerUser, clearError, selectAuthLoading, selectAuthError } from '../Store/authSlice';
+import Input from '../Input';
+import Button from '../Button';
+
 
 function RegisterForm() {
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
-  
-  // Read state parameters from selectors
   const loading = useSelector(selectAuthLoading);
   const error = useSelector(selectAuthError);
-
-  // Set up simple individual variables for each text box input field
   const [name, setName] = useState('');
   const [surname, setSurname] = useState('');
   const [email, setEmail] = useState('');
   const [cellNumber, setCellNumber] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  
   const [localError, setLocalError] = useState('');
 
-  // Runs when user hits the submission action trigger button
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setLocalError('');
 
-    // Explicit validation check for empty string inputs
     if (name === '' || surname === '' || email === '' || cellNumber === '' || password === '' || confirmPassword === '') {
       setLocalError('Please fill in all fields');
       return;
     }
     
-    // Validation check to make sure both passwords match exactly
     if (password !== confirmPassword) {
       setLocalError('Passwords do not match');
       return;
     }
     
-    // Validation check to make sure password length meets criteria
     if (password.length < 6) {
       setLocalError('Password must be at least 6 characters');
       return;
     }
 
-    // Process our dispatch registration action payload configuration
     const resultAction = await dispatch(registerUser({ 
       name: name, 
       surname: surname, 
@@ -56,25 +47,21 @@ function RegisterForm() {
       cellNumber: cellNumber 
     }));
     
-    // Evaluate if transactions executed flawlessly using standard Redux matchers
     if (registerUser.fulfilled.match(resultAction)) {
       navigate('/');
     }
   }
 
-  // Clear all error tracking logs simultaneously
   function handleCloseError() {
     dispatch(clearError());
     setLocalError('');
   }
 
-  // Figure out what alert messages require mapping display outputs
   const displayError = error || localError || '';
 
   return (
     <div className="register-form-wrapper">
       
-      {/* Show alert banner box layer if error parameters exist */}
       {displayError !== '' ? (
         <div className="auth-error">
           <span>{displayError}</span>
@@ -83,7 +70,6 @@ function RegisterForm() {
       ) : null}
       
       <form onSubmit={handleSubmit}>
-        {/* First Name & Surname Grid */}
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.8rem' }}>
           <Input
             label="First Name"
