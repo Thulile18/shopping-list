@@ -1,4 +1,3 @@
-import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useSearchParams } from 'react-router-dom';
 import {
@@ -15,32 +14,40 @@ function ShoppingListFilters() {
   const searchTerm = useSelector(selectSearchTerm);
   const sortBy = useSelector(selectSortBy);
   const sortOrder = useSelector(selectSortOrder);
+  const [searchParams, setSearchParams] = useSearchParams();
 
   function handleSearchChange(e: React.ChangeEvent<HTMLInputElement>) {
-    dispatch(setSearchTerm(e.target.value));
+    const newValue = e.target.value;
+    dispatch(setSearchTerm(newValue));
+
+    setSearchParams({
+      search: newValue,
+      sort: sortBy,
+      order: sortOrder,
+    });
   }
 
   function handleSortChange(e: React.ChangeEvent<HTMLSelectElement>) {
-  const newValue = e.target.value;
-  dispatch(setSortBy(newValue));
+    const newValue = e.target.value;
+    dispatch(setSortBy(newValue));
 
-  setSearchParams({
-    search: searchTerm,
-    sort: newValue,
-    order: sortOrder,
-  });
-}
+    setSearchParams({
+      search: searchTerm,
+      sort: newValue,
+      order: sortOrder,
+    });
+  }
 
   function handleOrderChange(e: React.ChangeEvent<HTMLSelectElement>) {
-  const newValue = e.target.value;
-  dispatch(setSortOrder(newValue));
+    const newValue = e.target.value;
+    dispatch(setSortOrder(newValue));
 
-  setSearchParams({
-    search: searchTerm,
-    sort: sortBy,
-    order: newValue,
-  });
-}
+    setSearchParams({
+      search: searchTerm,
+      sort: sortBy,
+      order: newValue,
+    });
+  }
 
   return (
     <div className="filters-bar">
@@ -56,19 +63,19 @@ function ShoppingListFilters() {
       </div>
       
       <div className="filter-group">
-        <label>Sort by:</label>
+        <label> Sort by:</label>
         <select value={sortBy} onChange={handleSortChange}>
-          <option value="name">Name</option>
-          <option value="category">Category</option>
-          <option value="createdAt">Date added</option>
+          <option value="name"> Name </option>
+          <option value="category"> Category </option>
+          <option value="createdAt"> Date added </option>
         </select>
       </div>
       
       <div className="filter-group">
-        <label>Order:</label>
+        <label> Order:</label>
         <select value={sortOrder} onChange={handleOrderChange}>
-          <option value="asc">Ascending</option>
-          <option value="desc">Descending</option>
+          <option value="asc"> Ascending </option>
+          <option value="desc"> Descending </option>
         </select>
       </div>
       
