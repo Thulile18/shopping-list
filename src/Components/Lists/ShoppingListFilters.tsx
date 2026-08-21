@@ -1,5 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useSearchParams } from 'react-router-dom';
 import {
   setSearchTerm,
   setSortBy,
@@ -11,7 +12,6 @@ import {
 
 function ShoppingListFilters() {
   const dispatch = useDispatch();
-
   const searchTerm = useSelector(selectSearchTerm);
   const sortBy = useSelector(selectSortBy);
   const sortOrder = useSelector(selectSortOrder);
@@ -21,12 +21,26 @@ function ShoppingListFilters() {
   }
 
   function handleSortChange(e: React.ChangeEvent<HTMLSelectElement>) {
-    dispatch(setSortBy(e.target.value));
-  }
+  const newValue = e.target.value;
+  dispatch(setSortBy(newValue));
+
+  setSearchParams({
+    search: searchTerm,
+    sort: newValue,
+    order: sortOrder,
+  });
+}
 
   function handleOrderChange(e: React.ChangeEvent<HTMLSelectElement>) {
-    dispatch(setSortOrder(e.target.value));
-  }
+  const newValue = e.target.value;
+  dispatch(setSortOrder(newValue));
+
+  setSearchParams({
+    search: searchTerm,
+    sort: sortBy,
+    order: newValue,
+  });
+}
 
   return (
     <div className="filters-bar">
