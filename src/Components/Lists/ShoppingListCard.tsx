@@ -25,6 +25,7 @@ function ShoppingListCard({ item, onEdit }: ShoppingListCardProps) {
     if (confirmation === true) {
       await dispatch(removeShoppingList(item.id));
     }
+  }
   
   function handleEditClick() {
     onEdit(item);
