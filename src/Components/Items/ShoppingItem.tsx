@@ -29,8 +29,12 @@ function ShoppingItem({ item, onEdit }: ShoppingItemProps) {
     }
   }
 
-  function handleEditClick() {
+    function handleEditClick() {
     onEdit(item);
+  }
+
+  function handleShareEmail(email: string) {
+    dispatch(shareShoppingList({ id: item.id, email: email, currentSharedWith: item.sharedWith }));
   }
 
   return (
