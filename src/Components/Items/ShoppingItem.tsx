@@ -37,7 +37,7 @@ function ShoppingItem({ item, onEdit }: ShoppingItemProps) {
     dispatch(shareShoppingList({ id: item.id, email: email, currentSharedWith: item.sharedWith }));
   }
 
-  return (
+    return (
     <div className="list-item-card">
       <div className="item-name">{item.name}</div>
       
@@ -58,10 +58,22 @@ function ShoppingItem({ item, onEdit }: ShoppingItemProps) {
         <Button variant="warning" size="sm" onClick={handleEditClick}>
             Edit
         </Button>
+        <Button variant="outline" size="sm" onClick={function () { setIsShareOpen(true); }}>
+            Share
+        </Button>
         <Button variant="danger" size="sm" onClick={handleDelete}>
             Delete
         </Button>
       </div>
+
+      <ShareModal
+        isOpen={isShareOpen}
+        onClose={function () { setIsShareOpen(false); }}
+        listId={item.id}
+        listName={item.name}
+        sharedWith={item.sharedWith}
+        onShareEmail={handleShareEmail}
+      />
     </div>
   );
 }
