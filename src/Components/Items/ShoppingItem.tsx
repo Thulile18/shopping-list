@@ -1,7 +1,9 @@
+import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../Store';
-import { removeShoppingList } from '../Store/shoppingSlice';
+import { removeShoppingList, shareShoppingList } from '../Store/shoppingSlice';
 import Button from '../Button';
+import ShareModal from '../ShareModal';
 
 interface ShoppingItemProps {
   item: {
@@ -12,13 +14,14 @@ interface ShoppingItemProps {
     category: string;
     image: string;
     createdAt: string;
+    sharedWith: string[];
   };
   onEdit: (item: any) => void;
 }
 
 function ShoppingItem({ item, onEdit }: ShoppingItemProps) {
   const dispatch = useDispatch<AppDispatch>();
-
+  const [isShareOpen, setIsShareOpen] = useState(false);
   async function handleDelete() {
     const confirmation = window.confirm('Delete this item?');
     if (confirmation === true) {
