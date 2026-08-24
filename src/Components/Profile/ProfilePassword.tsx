@@ -59,7 +59,7 @@ function ProfilePassword() {
   return (
     <div className="card">
       <div className="card-header">
-        <h2 className="card-title">Change Password</h2>
+        <h2 className="card-title"> Change Password </h2>
       </div>
 
       {error !== '' ? (
