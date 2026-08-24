@@ -1,80 +1,140 @@
-import axios from 'axios';
+const API_BASE = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3000';
 
-const API_BASE = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000';
+const defaultHeaders = {
+  'Content-Type': 'application/json',
+};
 
-export const api = axios.create({
-  baseURL: API_BASE,
-  headers: {
-    'Content-Type': 'application/json',
-  },
-});
-
-export function getUsers() {
-  return api.get('/users');
+export async function getUsers() {
+  const response = await fetch(API_BASE + '/users');
+  const data = await response.json();
+  return { data: data };
 }
 
-export function getUser(id: string) {
-  return api.get('/users/' + id);
+export async function getUser(id: string) {
+  const response = await fetch(API_BASE + '/users/' + id);
+  const data = await response.json();
+  return { data: data };
 }
 
-export function createUser(data: any) {
-  return api.post('/users', data);
+export async function createUser(data: any) {
+  const response = await fetch(API_BASE + '/users', {
+    method: 'POST',
+    headers: defaultHeaders,
+    body: JSON.stringify(data),
+  });
+  const result = await response.json();
+  return { data: result };
 }
 
-export function updateUser(id: string, data: any) {
-  return api.patch('/users/' + id, data);
+export async function updateUser(id: string, data: any) {
+  const response = await fetch(API_BASE + '/users/' + id, {
+    method: 'PATCH',
+    headers: defaultHeaders,
+    body: JSON.stringify(data),
+  });
+  const result = await response.json();
+  return { data: result };
 }
 
-export function deleteUser(id: string) {
-  return api.delete('/users/' + id);
+export async function deleteUser(id: string) {
+  const response = await fetch(API_BASE + '/users/' + id, {
+    method: 'DELETE',
+  });
+  const result = await response.json();
+  return { data: result };
 }
 
-export function getShoppingLists() {
-  return api.get('/shoppingLists');
+export async function getShoppingLists() {
+  const response = await fetch(API_BASE + '/shoppingLists');
+  const data = await response.json();
+  return { data: data };
 }
 
-export function getShoppingList(id: string) {
-  return api.get('/shoppingLists/' + id);
+export async function getShoppingList(id: string) {
+  const response = await fetch(API_BASE + '/shoppingLists/' + id);
+  const data = await response.json();
+  return { data: data };
 }
 
-export function createShoppingList(data: any) {
-  return api.post('/shoppingLists', data);
+export async function createShoppingList(data: any) {
+  const response = await fetch(API_BASE + '/shoppingLists', {
+    method: 'POST',
+    headers: defaultHeaders,
+    body: JSON.stringify(data),
+  });
+  const result = await response.json();
+  return { data: result };
 }
 
-export function updateShoppingList(id: string, data: any) {
-  return api.patch('/shoppingLists/' + id, data);
+export async function updateShoppingList(id: string, data: any) {
+  const response = await fetch(API_BASE + '/shoppingLists/' + id, {
+    method: 'PATCH',
+    headers: defaultHeaders,
+    body: JSON.stringify(data),
+  });
+  const result = await response.json();
+  return { data: result };
 }
 
-export function deleteShoppingList(id: string) {
-  return api.delete('/shoppingLists/' + id);
+export async function deleteShoppingList(id: string) {
+  const response = await fetch(API_BASE + '/shoppingLists/' + id, {
+    method: 'DELETE',
+  });
+  const result = await response.json();
+  return { data: result };
 }
 
-export function getShoppingListsByUser(userId: string) {
-  return api.get('/shoppingLists?userId=' + userId);
+export async function getShoppingListsByUser(userId: string) {
+  const response = await fetch(API_BASE + '/shoppingLists?userId=' + userId);
+  const data = await response.json();
+  return { data: data };
 }
 
-export function getShoppingItems() {
-  return api.get('/shoppingItems');
+export async function getShoppingItems() {
+  const response = await fetch(API_BASE + '/shoppingItems');
+  const data = await response.json();
+  return { data: data };
 }
 
-export function getShoppingItem(id: string) {
-  return api.get('/shoppingItems/' + id);
+export async function getShoppingItem(id: string) {
+  const response = await fetch(API_BASE + '/shoppingItems/' + id);
+  const data = await response.json();
+  return { data: data };
 }
 
-export function createShoppingItem(data: any) {
-  return api.post('/shoppingItems', data);
+export async function createShoppingItem(data: any) {
+  const response = await fetch(API_BASE + '/shoppingItems', {
+    method: 'POST',
+    headers: defaultHeaders,
+    body: JSON.stringify(data),
+  });
+  const result = await response.json();
+  return { data: result };
 }
 
-export function updateShoppingItem(id: string, data: any) {
-  return api.patch('/shoppingItems/' + id, data);
+export async function updateShoppingItem(id: string, data: any) {
+  const response = await fetch(API_BASE + '/shoppingItems/' + id, {
+    method: 'PATCH',
+    headers: defaultHeaders,
+    body: JSON.stringify(data),
+  });
+  const result = await response.json();
+  return { data: result };
 }
 
-export function deleteShoppingItem(id: string) {
-  return api.delete('/shoppingItems/' + id);
+export async function deleteShoppingItem(id: string) {
+  const response = await fetch(API_BASE + '/shoppingItems/' + id, {
+    method: 'DELETE',
+  });
+  const result = await response.json();
+  return { data: result };
 }
 
-export function getShoppingItemsByList(listId: string) {
-  return api.get('/shoppingItems?listId=' + listId);
+export async function getShoppingItemsByList(listId: string) {
+  const response = await fetch(API_BASE + '/shoppingItems?listId=' + listId);
+  const data = await response.json();
+  return { data: data };
 }
 
+export const api = {};
 export default api;
