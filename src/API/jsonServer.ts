@@ -53,5 +53,28 @@ export function getShoppingListsByUser(userId: string) {
   return api.get('/shoppingLists?userId=' + userId);
 }
 
-export default api;
+export function getShoppingItems() {
+  return api.get('/shoppingItems');
+}
 
+export function getShoppingItem(id: string) {
+  return api.get('/shoppingItems/' + id);
+}
+
+export function createShoppingItem(data: any) {
+  return api.post('/shoppingItems', data);
+}
+
+export function updateShoppingItem(id: string, data: any) {
+  return api.patch('/shoppingItems/' + id, data);
+}
+
+export function deleteShoppingItem(id: string) {
+  return api.delete('/shoppingItems/' + id);
+}
+
+export function getShoppingItemsByList(listId: string) {
+  return api.get('/shoppingItems?listId=' + listId);
+}
+
+export default api;
