@@ -57,7 +57,7 @@ textarea {
   opacity: 0.9;
 }
 
-.btn-primary { background-color: #4361ee; color: white; }
+.btn-primary { background: linear-gradient(135deg, #4361ee 0%, #3a86ff 100%); color: white; }
 .btn-success { background-color: #2ecc71; color: white; }
 .btn-danger  { background-color: #e74c3c; color: white; }
 .btn-warning { background-color: #f39c12; color: white; }
@@ -144,8 +144,14 @@ textarea {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #e8ecf1;
+  background: linear-gradient(135deg, #4cc9c0 0%, #4361ee 100%);
   padding: 20px;
+}
+
+.auth-icon {
+  text-align: center;
+  font-size: 32px;
+  margin-bottom: 10px;
 }
 
 .auth-card {
