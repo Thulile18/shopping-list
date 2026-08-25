@@ -54,8 +54,8 @@ function ShoppingItemForm({ isOpen, onClose, editingItem, userId }: ShoppingItem
          sharedWith: editingItem ? editingItem.sharedWith : [],
     };
 
-    if (editingItem) {
-      const resultAction = await dispatch(editShoppingList({ id: editingItem.id, data: data }));
+        if (editingItem) {
+      const resultAction = await dispatch(editShoppingList({ id: editingItem.id, data: data, currentUserId: userId }));
       if (editShoppingList.fulfilled.match(resultAction)) {
         onClose();
       }
