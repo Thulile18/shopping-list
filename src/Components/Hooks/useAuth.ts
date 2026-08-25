@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { AppDispatch } from '../Store';
+import { clearShoppingState } from '../Store/shoppingSlice';
 import {
   loginUser,
   registerUser,
@@ -51,14 +52,14 @@ export function useAuth() {
     }
   }
 
-  function logoutUser() {
-   
+   function logoutUser() {
     localStorage.removeItem('shopping_token');
-    
+
     dispatch(logout());
-    
+    dispatch(clearShoppingState());
+
     navigate('/');
-  }
+  } 
 
   function clearAuthError() {
     dispatch(clearError());
