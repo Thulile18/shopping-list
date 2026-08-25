@@ -2,6 +2,7 @@ import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import { ShoppingState, ShoppingList, ShoppingListInput } from '../Types';
 import {
   getShoppingListsByUser,
+  getShoppingList,
   createShoppingList,
   updateShoppingList,
   deleteShoppingList,
