@@ -24,13 +24,14 @@ function ProfileInfo() {
       return;
     }
 
-    const payload = {
+        const payload = {
       id: user.id,
       data: {
         name: name,
         surname: surname,
         cellNumber: cellNumber
-      }
+      },
+      currentUserId: user.id
     };
 
     const action = await dispatch(updateProfile(payload));
