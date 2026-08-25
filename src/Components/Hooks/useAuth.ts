@@ -14,6 +14,7 @@ import {
 } from '../Store/authSlice';
 
 export function useAuth() {
+ 
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
   const user = useSelector(selectUser);
@@ -23,9 +24,9 @@ export function useAuth() {
   const isAuthenticated = useSelector(selectIsAuthenticated);
 
   async function login(email: string, password: string) {
-    const resultAction = await dispatch(loginUser({ email: email, password: password }));
+    const actionResult = await dispatch(loginUser({ email: email, password: password }));
     
-    if (loginUser.fulfilled.match(resultAction)) {
+    if (loginUser.fulfilled.match(actionResult)) {
       navigate('/');
       return { success: true };
     } else {
@@ -40,9 +41,9 @@ export function useAuth() {
     password: string;
     cellNumber: string;
   }) {
-    const resultAction = await dispatch(registerUser(data));
+    const actionResult = await dispatch(registerUser(data));
     
-    if (registerUser.fulfilled.match(resultAction)) {
+    if (registerUser.fulfilled.match(actionResult)) {
       navigate('/');
       return { success: true };
     } else {
@@ -51,7 +52,7 @@ export function useAuth() {
   }
 
   function logoutUser() {
-    
+   
     localStorage.removeItem('shopping_token');
     
     dispatch(logout());
