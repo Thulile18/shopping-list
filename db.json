@@ -7,8 +7,17 @@
       "surname": "Gates",
       "cellNumber": "0618044825",
       "id": "s3qoE74dbzE"
+    },
+    {
+      "email": "siya@gmail.com",
+      "password": "U2FsdGVkX1/AvXp67V2fnf/XPhDLeKUheG3RF+AAncc=",
+      "name": "Siya",
+      "surname": "Gwamanda",
+      "cellNumber": "0656753453",
+      "id": "B8aH1ja359c"
     }
   ],
   "shoppingLists": [],
-  "shoppingItems": []
+  "shoppingItems": [],
+  "$schema": "./node_modules/json-server/schema.json"
 }

@@ -50,8 +50,12 @@ export function useAuth() {
     }
   }
 
-    function logoutUser() {
+  function logoutUser() {
+    
+    localStorage.removeItem('shopping_token');
+    
     dispatch(logout());
+    
     navigate('/');
   }
 
