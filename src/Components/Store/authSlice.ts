@@ -81,8 +81,11 @@ export const registerUser = createAsyncThunk(
 
 export const updateProfile = createAsyncThunk(
   'auth/updateProfile',
-  async function ({ id, data }: { id: string; data: Partial<User> }, { rejectWithValue }) {
+  async function ({ id, data, currentUserId }: { id: string; data: Partial<User>; currentUserId: string }, { rejectWithValue }) {
     try {
+      if (id !== currentUserId) {
+        return rejectWithValue('You are not allowed to update this profile');
+      }
       const response = await updateUser(id, data);
       return response.data as User;
     } catch (error: any) {
@@ -93,8 +96,11 @@ export const updateProfile = createAsyncThunk(
 
 export const updatePassword = createAsyncThunk(
   'auth/updatePassword',
-  async function ({ id, newPassword }: { id: string; newPassword: string }, { rejectWithValue }) {
+  async function ({ id, newPassword, currentUserId }: { id: string; newPassword: string; currentUserId: string }, { rejectWithValue }) {
     try {
+      if (id !== currentUserId) {
+        return rejectWithValue('You are not allowed to update this password');
+      }
       const encrypted = encrypt(newPassword);
       const response = await updateUser(id, { password: encrypted });
       return response.data as User;
