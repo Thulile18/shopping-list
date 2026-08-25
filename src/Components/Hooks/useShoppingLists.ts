@@ -55,14 +55,14 @@ export function useShoppingLists(userId?: string) {
     }
   }
 
-  async function editItem(id: string, data: Partial<{
+    async function editItem(id: string, data: Partial<{
     name: string;
     quantity: number;
     notes: string;
     category: string;
     image: string;
-  }>) {
-    const resultAction = await dispatch(editShoppingList({ id: id, data: data }));
+  }>, currentUserId: string) {
+    const resultAction = await dispatch(editShoppingList({ id: id, data: data, currentUserId: currentUserId }));
     
     if (editShoppingList.fulfilled.match(resultAction)) {
       return { success: true };
@@ -71,8 +71,8 @@ export function useShoppingLists(userId?: string) {
     }
   }
 
-  async function deleteItem(id: string) {
-    const resultAction = await dispatch(removeShoppingList(id));
+    async function deleteItem(id: string, currentUserId: string) {
+    const resultAction = await dispatch(removeShoppingList({ id: id, currentUserId: currentUserId }));
     
     if (removeShoppingList.fulfilled.match(resultAction)) {
       return { success: true };
