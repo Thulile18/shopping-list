@@ -88,8 +88,12 @@ export const shareShoppingList = createAsyncThunk(
 
 export const removeShoppingList = createAsyncThunk(
   'shopping/remove',
-  async function (id: string, { rejectWithValue }) {
+  async function ({ id, currentUserId }: { id: string; currentUserId: string }, { rejectWithValue }) {
     try {
+      const existingList = await getShoppingList(id);
+      if (existingList.data.userId !== currentUserId) {
+        return rejectWithValue('You are not allowed to delete this list');
+      }
       await deleteShoppingList(id);
       return id;
     } catch (error: any) {
