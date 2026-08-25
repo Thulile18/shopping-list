@@ -55,8 +55,12 @@ export const addShoppingList = createAsyncThunk(
 
 export const editShoppingList = createAsyncThunk(
   'shopping/edit',
-  async function ({ id, data }: { id: string; data: Partial<ShoppingListInput> }, { rejectWithValue }) {
+  async function ({ id, data, currentUserId }: { id: string; data: Partial<ShoppingListInput>; currentUserId: string }, { rejectWithValue }) {
     try {
+      const existingList = await getShoppingList(id);
+      if (existingList.data.userId !== currentUserId) {
+        return rejectWithValue('You are not allowed to edit this list');
+      }
       const response = await updateShoppingList(id, data);
       return response.data as ShoppingList;
     } catch (error: any) {
@@ -64,6 +68,7 @@ export const editShoppingList = createAsyncThunk(
     }
   }
 );
+
 export const shareShoppingList = createAsyncThunk(
   'shopping/share',
   async function ({ id, email, currentSharedWith }: { id: string; email: string; currentSharedWith: string[] }, { rejectWithValue }) {
