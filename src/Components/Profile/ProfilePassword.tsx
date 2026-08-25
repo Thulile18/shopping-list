@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch } from '../Store';
 import { updatePassword, selectUser, selectAuthLoading } from '../Store/authSlice';
+import { decrypt } from '../Utils/encryption';
 import Input from '../Input';
 import Button from '../Button';
 
@@ -35,13 +36,20 @@ function ProfilePassword() {
       return;
     }
 
-    if (user === null || user === undefined) {
+       if (user === null || user === undefined) {
+      return;
+    }
+
+    const actualCurrentPassword = decrypt(user.password);
+    if (currentPassword !== actualCurrentPassword) {
+      setError('Current password is incorrect');
       return;
     }
 
     const payload = {
       id: user.id,
-      newPassword: newPassword
+      newPassword: newPassword,
+      currentUserId: user.id
     };
 
     const action = await dispatch(updatePassword(payload));
