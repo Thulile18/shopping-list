@@ -1,7 +1,8 @@
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch } from '../Store';
 import { removeShoppingList, shareShoppingList } from '../Store/shoppingSlice';
+import { selectUser } from '../Store/authSlice';
 import Button from '../Button';
 import ShareModal from '../ShareModal';
 
@@ -21,14 +22,14 @@ interface ShoppingItemProps {
 
 function ShoppingItem({ item, onEdit }: ShoppingItemProps) {
   const dispatch = useDispatch<AppDispatch>();
+  const currentUser = useSelector(selectUser);
   const [isShareOpen, setIsShareOpen] = useState(false);
-  async function handleDelete() {
+    async function handleDelete() {
     const confirmation = window.confirm('Delete this item?');
-    if (confirmation === true) {
-      await dispatch(removeShoppingList(item.id));
+    if (confirmation === true && currentUser) {
+      await dispatch(removeShoppingList({ id: item.id, currentUserId: currentUser.id }));
     }
   }
-
     function handleEditClick() {
     onEdit(item);
   }
