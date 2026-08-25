@@ -106,6 +106,14 @@ const shoppingSlice = createSlice({
   name: 'shopping',
   initialState: initialState,
   reducers: {
+    clearShoppingState: function (state) {
+      state.items = [];
+      state.loading = false;
+      state.error = null;
+      state.searchTerm = '';
+      state.sortBy = 'createdAt';
+      state.sortOrder = 'desc';
+    },
     setSearchTerm: function (state, action: PayloadAction<string>) {
       state.searchTerm = action.payload;
     },
@@ -199,7 +207,7 @@ const shoppingSlice = createSlice({
   },
 });
 
-export const { setSearchTerm, setSortBy, setSortOrder, clearError } = shoppingSlice.actions;
+export const { clearShoppingState, setSearchTerm, setSortBy, setSortOrder, clearError } = shoppingSlice.actions;
 
 export function selectShopping(state: RootState) {
   return state.shopping;
