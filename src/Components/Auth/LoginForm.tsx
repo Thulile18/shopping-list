@@ -1,16 +1,13 @@
 import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate, Link } from 'react-router-dom';
-import { AppDispatch } from '../Store';
-import { loginUser, clearError, selectAuthLoading, selectAuthError } from '../Store/authSlice';
+import { Link } from 'react-router-dom';
+import { useAuth } from '../Hooks/useAuth';
 import Input from '../Input';
 import Button from '../Button';
 
 function LoginForm() {
-  const dispatch = useDispatch<AppDispatch>();
-  const navigate = useNavigate();
-  const loading = useSelector(selectAuthLoading);
-  const error = useSelector(selectAuthError);
+  
+  const { login, loading, error, clearError } = useAuth();
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [localError, setLocalError] = useState('');
@@ -23,16 +20,12 @@ function LoginForm() {
       setLocalError('Please fill in all fields');
       return;
     }
-
-    const resultAction = await dispatch(loginUser({ email: email, password: password }));
-    
-    if (loginUser.fulfilled.match(resultAction)) {
-      navigate('/');
-    }
+ 
+    await login(email, password);
   }
 
   function handleCloseError() {
-    dispatch(clearError());
+    clearError();
     setLocalError('');
   }
 
@@ -50,6 +43,7 @@ function LoginForm() {
       
       <form onSubmit={handleSubmit}>
         <Input
+          id="login-email"
           label="Email Address"
           type="email"
           value={email}
@@ -59,6 +53,7 @@ function LoginForm() {
         />
         
         <Input
+          id="login-password"
           label="Password"
           type="password"
           value={password}
@@ -72,7 +67,7 @@ function LoginForm() {
         </Button>
       </form>
       
-      <div className="divider">or</div>
+      <div className="divider"> or </div>
       
       <p style={{ textAlign: 'center', color: '#718096' }}>
         Don't have an account?{' '}

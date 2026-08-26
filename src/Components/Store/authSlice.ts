@@ -4,6 +4,7 @@ import { encrypt, decrypt } from '../Utils/encryption';
 import { getUsers, createUser, updateUser } from '../../API/jsonServer';
 import { RootState } from './index';
 
+
 const initialState: AuthState = {
   user: null,
   token: localStorage.getItem('shopping_token') || null,

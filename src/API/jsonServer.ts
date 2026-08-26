@@ -1,7 +1,7 @@
-const API_BASE = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000';
+const API_BASE = 'http://localhost:5000';
 
 const defaultHeaders = {
-  'Content-Type': 'application/json',
+  'Content-Type': 'application/json'
 };
 
 export async function getUsers() {
@@ -20,7 +20,7 @@ export async function createUser(data: any) {
   const response = await fetch(API_BASE + '/users', {
     method: 'POST',
     headers: defaultHeaders,
-    body: JSON.stringify(data),
+    body: JSON.stringify(data)
   });
   const result = await response.json();
   return { data: result };
@@ -30,7 +30,7 @@ export async function updateUser(id: string, data: any) {
   const response = await fetch(API_BASE + '/users/' + id, {
     method: 'PATCH',
     headers: defaultHeaders,
-    body: JSON.stringify(data),
+    body: JSON.stringify(data)
   });
   const result = await response.json();
   return { data: result };
@@ -38,7 +38,7 @@ export async function updateUser(id: string, data: any) {
 
 export async function deleteUser(id: string) {
   const response = await fetch(API_BASE + '/users/' + id, {
-    method: 'DELETE',
+    method: 'DELETE'
   });
   const result = await response.json();
   return { data: result };
@@ -60,7 +60,7 @@ export async function createShoppingList(data: any) {
   const response = await fetch(API_BASE + '/shoppingLists', {
     method: 'POST',
     headers: defaultHeaders,
-    body: JSON.stringify(data),
+    body: JSON.stringify(data)
   });
   const result = await response.json();
   return { data: result };
@@ -70,7 +70,7 @@ export async function updateShoppingList(id: string, data: any) {
   const response = await fetch(API_BASE + '/shoppingLists/' + id, {
     method: 'PATCH',
     headers: defaultHeaders,
-    body: JSON.stringify(data),
+    body: JSON.stringify(data)
   });
   const result = await response.json();
   return { data: result };
@@ -78,7 +78,7 @@ export async function updateShoppingList(id: string, data: any) {
 
 export async function deleteShoppingList(id: string) {
   const response = await fetch(API_BASE + '/shoppingLists/' + id, {
-    method: 'DELETE',
+    method: 'DELETE'
   });
   const result = await response.json();
   return { data: result };
@@ -106,7 +106,7 @@ export async function createShoppingItem(data: any) {
   const response = await fetch(API_BASE + '/shoppingItems', {
     method: 'POST',
     headers: defaultHeaders,
-    body: JSON.stringify(data),
+    body: JSON.stringify(data)
   });
   const result = await response.json();
   return { data: result };
@@ -116,7 +116,7 @@ export async function updateShoppingItem(id: string, data: any) {
   const response = await fetch(API_BASE + '/shoppingItems/' + id, {
     method: 'PATCH',
     headers: defaultHeaders,
-    body: JSON.stringify(data),
+    body: JSON.stringify(data)
   });
   const result = await response.json();
   return { data: result };
@@ -124,7 +124,7 @@ export async function updateShoppingItem(id: string, data: any) {
 
 export async function deleteShoppingItem(id: string) {
   const response = await fetch(API_BASE + '/shoppingItems/' + id, {
-    method: 'DELETE',
+    method: 'DELETE'
   });
   const result = await response.json();
   return { data: result };
