@@ -15,9 +15,51 @@
       "surname": "Gwamanda",
       "cellNumber": "0656753453",
       "id": "B8aH1ja359c"
+    },
+    {
+      "email": "bill@gmail.com",
+      "password": "U2FsdGVkX19RbHfqVb+C41mhOIMJzzemCB2Nz0Z5Ino=",
+      "name": "Bill",
+      "surname": "Davide",
+      "cellNumber": "0738762340",
+      "id": "Qh8jnY1rM58"
     }
   ],
-  "shoppingLists": [],
+  "shoppingLists": [
+    {
+      "userId": "s3qoE74dbzE",
+      "name": "Bread",
+      "quantity": 5,
+      "notes": "Get the whole wheat brown bread version if available",
+      "category": "Groceries",
+      "image": "https://unsplash.com",
+      "createdAt": "2026-08-26T09:46:50.446Z",
+      "sharedWith": [],
+      "id": "zD1HDGyixn4"
+    },
+    {
+      "userId": "s3qoE74dbzE",
+      "name": "Laptop Charger",
+      "quantity": 2,
+      "notes": "Type C fast charger",
+      "category": "Electronics",
+      "image": "hskdfshfugsughsruit",
+      "createdAt": "2026-08-26T09:55:12.726Z",
+      "sharedWith": [],
+      "id": "g_xx-S-C_G4"
+    },
+    {
+      "userId": "s3qoE74dbzE",
+      "name": "Apples",
+      "quantity": 10,
+      "notes": "Red crisp apples",
+      "category": "Groceries",
+      "image": "jmcfvnjxxjgdlc",
+      "createdAt": "2026-08-26T09:58:41.317Z",
+      "sharedWith": [],
+      "id": "qaSqQ5Ig9ts"
+    }
+  ],
   "shoppingItems": [],
   "$schema": "./node_modules/json-server/schema.json"
 }
