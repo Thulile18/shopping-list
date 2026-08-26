@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../Hooks/useAuth';
 import Input from '../Input';
@@ -12,6 +12,12 @@ function LoginForm() {
   const [password, setPassword] = useState('');
   const [localError, setLocalError] = useState('');
 
+  // Automatically forces the inputs to be completely blank when this screen loads up
+  useEffect(() => {
+    setEmail('');
+    setPassword('');
+  }, []);
+
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setLocalError('');
@@ -21,7 +27,13 @@ function LoginForm() {
       return;
     }
  
-    await login(email, password);
+    const result = await login(email, password);
+
+    // Clear the tracking states locally if login is successful
+    if (result && result.success === true) {
+      setEmail('');
+      setPassword('');
+    }
   }
 
   function handleCloseError() {
@@ -81,3 +93,5 @@ function LoginForm() {
 }
 
 export default LoginForm;
+
+
