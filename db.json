@@ -28,38 +28,58 @@
   "shoppingLists": [
     {
       "userId": "s3qoE74dbzE",
+      "name": "milk",
+      "quantity": 1,
+      "notes": "farm fresh",
+      "category": "Groceries",
+      "image": "",
+      "createdAt": "2026-08-27T10:05:28.331Z",
+      "sharedWith": [],
+      "id": "m3cup-CGmbI"
+    },
+    {
+      "userId": "s3qoE74dbzE",
+      "name": "eggs",
+      "quantity": 1,
+      "notes": "fresh",
+      "category": "Groceries",
+      "image": "",
+      "createdAt": "2026-08-27T11:13:18.907Z",
+      "sharedWith": [],
+      "id": "RLatMEElHlY"
+    }
+  ],
+  "shoppingItems": [
+    {
+      "listId": "list-1",
       "name": "Bread",
       "quantity": 5,
       "notes": "Get the whole wheat brown bread version if available",
       "category": "Groceries",
       "image": "https://unsplash.com",
       "createdAt": "2026-08-26T09:46:50.446Z",
-      "sharedWith": [],
       "id": "zD1HDGyixn4"
     },
     {
-      "userId": "s3qoE74dbzE",
+      "listId": "list-1",
       "name": "Laptop Charger",
       "quantity": 2,
       "notes": "Type C fast charger",
       "category": "Electronics",
-      "image": "hskdfshfugsughsruit",
+      "image": "https://unsplash.com",
       "createdAt": "2026-08-26T09:55:12.726Z",
-      "sharedWith": [],
       "id": "g_xx-S-C_G4"
     },
     {
-      "userId": "s3qoE74dbzE",
+      "listId": "list-1",
       "name": "bbsfb",
       "quantity": 3,
       "notes": "bs",
       "category": "Clothing",
-      "image": "bds",
+      "image": "https://unsplash.com",
       "createdAt": "2026-08-27T09:08:10.704Z",
-      "sharedWith": [],
       "id": "iHI4VlUGx5Y"
     }
   ],
-  "shoppingItems": [],
   "$schema": "./node_modules/json-server/schema.json"
 }
