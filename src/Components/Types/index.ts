@@ -11,12 +11,35 @@ export interface ShoppingList {
   id: string;
   userId: string;
   name: string;
-  quantity: number;
-  notes: string;
   category: string;
+  notes: string;
   image: string;
   createdAt: string;
   sharedWith: string[];
+}
+
+export interface ShoppingListInput {
+  name: string;
+  category: string;
+  notes: string;
+  image: string;
+  sharedWith: string[];
+}
+
+export interface ShoppingItem {
+  id: string;
+  listId: string;
+  name: string;
+  quantity: number;
+  completed: boolean;
+  createdAt: string;
+}
+
+export interface ShoppingItemInput {
+  listId: string;
+  name: string;
+  quantity: number;
+  completed: boolean;
 }
 
 export interface AuthState {
@@ -27,12 +50,13 @@ export interface AuthState {
 }
 
 export interface ShoppingState {
-  items: ShoppingList[];
+  lists: ShoppingList[];
+  items: ShoppingItem[];
   loading: boolean;
   error: string | null;
   searchTerm: string;
-  sortBy: string;     
-  sortOrder: string;   
+  sortBy: string;
+  sortOrder: string;
 }
 
 export interface LoginCredentials {
@@ -46,13 +70,4 @@ export interface RegisterData {
   name: string;
   surname: string;
   cellNumber: string;
-}
-
-export interface ShoppingListInput {
-  name: string;
-  quantity: number;
-  notes: string;
-  category: string;
-  image: string;
-  sharedWith: string[];
 }
