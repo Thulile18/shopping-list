@@ -8,9 +8,7 @@ function Navbar() {
   const navigate = useNavigate();
   const location = useLocation();
   
-  const { user, token } = useSelector(function (state: RootState) {
-    return state.auth;
-  });
+  const { user, token } = useSelector((state: RootState) => state.auth);
 
   function handleLogout() {
     dispatch(logout());
@@ -30,13 +28,13 @@ function Navbar() {
     <nav className="navbar">
       <div className="container nav-inner">
         
-        <Link to="/" className="brand">
+        <Link to="/home" className="brand">
           🛒 <span>Shopping List</span>
         </Link>
         
         <div className="nav-links">
           
-          <Link to="/" className={location.pathname === '/' ? 'active' : ''}>
+          <Link to="/home" className={location.pathname === '/home' ? 'active' : ''}>
             Home
           </Link>
           
@@ -44,12 +42,12 @@ function Navbar() {
             Profile
           </Link>
           
-          {user ? (
+          {user && (
             <span className="user-badge">
               <span className="avatar">{userInitial}</span>
               {user.name}
             </span>
-          ) : null}
+          )}
           
           <button onClick={handleLogout} className="btn btn-danger btn-sm">
             Logout

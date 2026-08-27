@@ -1,6 +1,5 @@
 import React from 'react';
 
-// Simple interface to layout our component parameter definitions
 interface PageLayoutProps {
   children: React.ReactNode;
 }

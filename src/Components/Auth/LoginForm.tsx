@@ -1,18 +1,20 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../Hooks/useAuth';
 import Input from '../Input';
 import Button from '../Button';
 
 function LoginForm() {
+
   const { login, loading, error, clearError } = useAuth();
-  const [localError, setLocalError] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [localError, setLocalError] = useState('');
 
+  const navigate = useNavigate();
   const location = useLocation();
 
-  useEffect(() => {
+  useEffect(function () {
     setEmail('');
     setPassword('');
     setLocalError('');
@@ -20,7 +22,7 @@ function LoginForm() {
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    setLocalError('');
+    setLocalError(''); 
 
     if (email === '' || password === '') {
       setLocalError('Please fill in all fields');
@@ -29,9 +31,13 @@ function LoginForm() {
  
     const result = await login(email, password);
 
-    if (result && result.success === true) {
-      setEmail('');
-      setPassword('');
+    if (result !== null && result !== undefined) {
+      if (result.success === true) {
+        setEmail('');
+        setPassword('');
+        
+        navigate('/home');
+      }
     }
   }
 
@@ -40,7 +46,12 @@ function LoginForm() {
     setLocalError('');
   }
 
-  const displayError = error || localError || '';
+  let displayError = '';
+  if (error !== '' && error !== null && error !== undefined) {
+    displayError = error;
+  } else if (localError !== '') {
+    displayError = localError;
+  }
 
   return (
     <div className="login-form-wrapper">
@@ -52,7 +63,7 @@ function LoginForm() {
         </div>
       ) : null}
       
-      <form onSubmit={handleSubmit} autoComplete="new-password">
+      <form onSubmit={handleSubmit}>
         <Input
           id="login-email"
           label="Email Address"
@@ -92,7 +103,3 @@ function LoginForm() {
 }
 
 export default LoginForm;
-
-
-
-

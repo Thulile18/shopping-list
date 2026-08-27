@@ -23,6 +23,14 @@
       "surname": "Davide",
       "cellNumber": "0738762340",
       "id": "Qh8jnY1rM58"
+    },
+    {
+      "email": "gwamandasiyamthanda13@gmail.com",
+      "password": "U2FsdGVkX18elJXBJ7oksOpQw6qx3noh8spXlJdAO7A=",
+      "name": "siya",
+      "surname": "gwamanda",
+      "cellNumber": "0123456789",
+      "id": "M5kK4EBLgtw"
     }
   ],
   "shoppingLists": [
@@ -47,6 +55,17 @@
       "createdAt": "2026-08-27T11:13:18.907Z",
       "sharedWith": [],
       "id": "RLatMEElHlY"
+    },
+    {
+      "userId": "M5kK4EBLgtw",
+      "name": "Cleaning Items",
+      "quantity": 2,
+      "notes": "Dishwasher",
+      "category": "Home",
+      "image": "",
+      "createdAt": "2026-08-27T13:32:58.654Z",
+      "sharedWith": [],
+      "id": "0Y56ILs7bFc"
     }
   ],
   "shoppingItems": [
@@ -79,6 +98,28 @@
       "image": "https://unsplash.com",
       "createdAt": "2026-08-27T09:08:10.704Z",
       "id": "iHI4VlUGx5Y"
+    }
+  ],
+  "categories": [
+    {
+      "id": "1",
+      "name": "Groceries"
+    },
+    {
+      "id": "2",
+      "name": "Electronics"
+    },
+    {
+      "id": "3",
+      "name": "Clothing"
+    },
+    {
+      "id": "4",
+      "name": "Household"
+    },
+    {
+      "id": "5",
+      "name": "Product"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

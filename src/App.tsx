@@ -10,10 +10,7 @@ import SharedList from './Components/Pages/SharedList';
 import Landing from './Components/Pages/Landing';
 
 function App() {
-  const { token } = useSelector(function (state: RootState) {
-    return state.auth;
-  });
-  
+  const { token } = useSelector((state: RootState) => state.auth);
   const isLoggedIn = Boolean(token);
 
   return (
@@ -21,27 +18,33 @@ function App() {
       <Navbar />
       
       <Routes>
-        
+        {/* Main Base Path: Everyone who opens the app lands here first */}
+        <Route path="/" element={<Landing />} />
+
+        {/* Auth Paths */}
         <Route
           path="/login"
-          element={isLoggedIn === true ? <Navigate to="/" replace /> : <Login />}
+          element={isLoggedIn ? <Navigate to="/home" replace /> : <Login />}
         />
         <Route
           path="/register"
-          element={isLoggedIn === true ? <Navigate to="/" replace /> : <Register />}
+          element={isLoggedIn ? <Navigate to="/home" replace /> : <Register />}
         />
 
+        {/* Protected Dashboard/Shopping List View */}
         <Route
-          path="/"
-          element={isLoggedIn === true ? <Home /> : <Landing />}
+          path="/home"
+          element={isLoggedIn ? <Home /> : <Navigate to="/login" replace />}
         />
+        
         <Route
           path="/profile"
-          element={isLoggedIn === true ? <Profile /> : <Navigate to="/login" replace />}
+          element={isLoggedIn ? <Profile /> : <Navigate to="/login" replace />}
         />
 
         <Route path="/shared/:id" element={<SharedList />} />
-
+        
+        {/* Fallback Catch-All Redirect */}
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </div>
@@ -49,3 +52,4 @@ function App() {
 }
 
 export default App;
+
