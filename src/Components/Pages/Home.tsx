@@ -49,14 +49,14 @@ function Home() {
     }
   }, [currentUser, dispatch]);
 
-  useEffect(function () {
+    useEffect(function () {
     const urlSearch = searchParams.get('search') || '';
     const urlSort = searchParams.get('sort') || 'createdAt';
     const urlOrder = searchParams.get('order') || 'desc';
     dispatch(setSearchTerm(urlSearch));
     dispatch(setSortBy(urlSort));
     dispatch(setSortOrder(urlOrder));
-  }, []);
+  }, [searchParams]);
 
   function handleSearchChange(e: React.ChangeEvent<HTMLInputElement>) {
     const newValue = e.target.value;
