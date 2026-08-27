@@ -18,7 +18,6 @@ import {
   selectSortBy,
   selectSortOrder,
 } from '../Store/shoppingSlice';
-import { selectUser } from '../Store/authSlice';
 import { getShoppingList } from '../../API/jsonServer';
 import { ShoppingList } from '../Types';
 import PageLayout from '../PageLayout';
@@ -32,7 +31,6 @@ function ListDetail() {
   const dispatch = useDispatch<AppDispatch>();
   const [searchParams, setSearchParams] = useSearchParams();
 
-  const currentUser = useSelector(selectUser);
   const items = useSelector(selectFilteredItems);
   const loading = useSelector(selectLoading);
   const searchTerm = useSelector(selectSearchTerm);
