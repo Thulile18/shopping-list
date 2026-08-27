@@ -8,11 +8,10 @@ import Home from './Components/Pages/Home';
 import Profile from './Components/Pages/Profile';
 import SharedList from './Components/Pages/SharedList';
 import Landing from './Components/Pages/Landing';
-
+import ListDetail from './Components/Pages/ListDetail';
 function App() {
   const { token } = useSelector((state: RootState) => state.auth);
   const isLoggedIn = Boolean(token);
-
   return (
     <div className="app-container">
       <Navbar />
@@ -20,7 +19,6 @@ function App() {
       <Routes>
         {/* Main Base Path: Everyone who opens the app lands here first */}
         <Route path="/" element={<Landing />} />
-
         {/* Auth Paths */}
         <Route
           path="/login"
@@ -30,7 +28,6 @@ function App() {
           path="/register"
           element={isLoggedIn ? <Navigate to="/home" replace /> : <Register />}
         />
-
         {/* Protected Dashboard/Shopping List View */}
         <Route
           path="/home"
@@ -42,6 +39,11 @@ function App() {
           element={isLoggedIn ? <Profile /> : <Navigate to="/login" replace />}
         />
 
+        <Route
+          path="/lists/:id"
+          element={isLoggedIn ? <ListDetail /> : <Navigate to="/login" replace />}
+        />
+
         <Route path="/shared/:id" element={<SharedList />} />
         
         {/* Fallback Catch-All Redirect */}
@@ -50,6 +52,4 @@ function App() {
     </div>
   );
 }
-
 export default App;
-
