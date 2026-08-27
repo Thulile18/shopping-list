@@ -136,5 +136,24 @@ export async function getShoppingItemsByList(listId: string) {
   return { data: data };
 }
 
-export const api = {};
+export const api = {
+  getUsers,
+  getUser,
+  createUser,
+  updateUser,
+  deleteUser,
+  getShoppingLists,
+  getShoppingList,
+  createShoppingList,
+  updateShoppingList,
+  deleteShoppingList,
+  getShoppingListsByUser,
+  getShoppingItems,
+  getShoppingItem,
+  createShoppingItem,
+  updateShoppingItem,
+  deleteShoppingItem,
+  getShoppingItemsByList
+};
+
 export default api;
