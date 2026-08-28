@@ -105,10 +105,11 @@ function ListDetail() {
       return;
     }
 
-    if (editingItem) {
+        if (editingItem && list) {
       await dispatch(editShoppingItem({
         id: editingItem.id,
         data: { name: itemName.trim(), quantity: Number(itemQuantity) || 1 },
+        currentUserId: list.userId,
       }));
     } else {
       await dispatch(addShoppingItem({
@@ -121,10 +122,10 @@ function ListDetail() {
     setIsFormOpen(false);
   }
 
-  async function handleDelete(itemId: string) {
+    async function handleDelete(itemId: string) {
     const confirmation = window.confirm('Delete this item?');
-    if (confirmation === true) {
-      await dispatch(removeShoppingItem(itemId));
+    if (confirmation === true && list) {
+      await dispatch(removeShoppingItem({ id: itemId, currentUserId: list.userId }));
     }
   }
 
