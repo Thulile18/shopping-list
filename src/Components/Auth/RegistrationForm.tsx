@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, Link } from 'react-router-dom';
+import bcrypt from 'bcryptjs'; // 👈 1. Added import for bcrypt hashing
 import { AppDispatch } from '../Store';
 import { registerUser, clearError, selectAuthLoading, selectAuthError } from '../Store/authSlice';
 import Input from '../Input';
 import Button from '../Button';
-
 
 function RegisterForm() {
   const dispatch = useDispatch<AppDispatch>();
@@ -39,11 +39,16 @@ function RegisterForm() {
       return;
     }
 
+    // 2. Hash the password with a salt round of 10 (Standard secure configuration)
+    const salt = bcrypt.genSaltSync(10);
+    const hashedPassword = bcrypt.hashSync(password, salt);
+
+    // 3. Dispatch the securely hashed payload to your Redux slice
     const resultAction = await dispatch(registerUser({ 
       name: name, 
       surname: surname, 
       email: email, 
-      password: password, 
+      password: hashedPassword, // 👈 Plain text is now safely hashed via bcrypt
       cellNumber: cellNumber 
     }));
     
