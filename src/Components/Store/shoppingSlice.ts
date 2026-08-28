@@ -7,6 +7,7 @@ import {
   updateShoppingList,
   deleteShoppingList,
   getShoppingItemsByList,
+  getShoppingItem,
   createShoppingItem,
   updateShoppingItem,
   deleteShoppingItem,
@@ -141,8 +142,13 @@ export const addShoppingItem = createAsyncThunk(
 
 export const editShoppingItem = createAsyncThunk(
   'shopping/editItem',
-  async function ({ id, data }: { id: string; data: Partial<ShoppingItemInput> }, { rejectWithValue }) {
+  async function ({ id, data, currentUserId }: { id: string; data: Partial<ShoppingItemInput>; currentUserId: string }, { rejectWithValue }) {
     try {
+      const existingItem = await getShoppingItem(id);
+      const parentList = await getShoppingList(existingItem.data.listId);
+      if (parentList.data.userId !== currentUserId) {
+        return rejectWithValue('You are not allowed to edit this item');
+      }
       const response = await updateShoppingItem(id, data);
       return response.data as ShoppingItem;
     } catch (error: any) {
@@ -165,8 +171,13 @@ export const toggleItemCompleted = createAsyncThunk(
 
 export const removeShoppingItem = createAsyncThunk(
   'shopping/removeItem',
-  async function (id: string, { rejectWithValue }) {
+  async function ({ id, currentUserId }: { id: string; currentUserId: string }, { rejectWithValue }) {
     try {
+      const existingItem = await getShoppingItem(id);
+      const parentList = await getShoppingList(existingItem.data.listId);
+      if (parentList.data.userId !== currentUserId) {
+        return rejectWithValue('You are not allowed to delete this item');
+      }
       await deleteShoppingItem(id);
       return id;
     } catch (error: any) {
