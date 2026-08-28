@@ -1,5 +1,11 @@
 {
-  "users": [],
+  "users": [
+    {
+      "id": "1",
+      "email": "mancane@gmail.com",
+      "password": "yourpasswordhere"
+    }
+  ],
   "shoppingLists": [],
   "shoppingItems": [],
   "categories": [
