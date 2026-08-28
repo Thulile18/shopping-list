@@ -39,16 +39,14 @@ function RegisterForm() {
       return;
     }
 
-    // 2. Hash the password with a salt round of 10 (Standard secure configuration)
     const salt = bcrypt.genSaltSync(10);
     const hashedPassword = bcrypt.hashSync(password, salt);
 
-    // 3. Dispatch the securely hashed payload to your Redux slice
     const resultAction = await dispatch(registerUser({ 
       name: name, 
       surname: surname, 
       email: email, 
-      password: hashedPassword, // 👈 Plain text is now safely hashed via bcrypt
+      password: hashedPassword, 
       cellNumber: cellNumber 
     }));
     
