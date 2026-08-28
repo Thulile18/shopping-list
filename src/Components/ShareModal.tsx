@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import Button from './Button';
 import Input from './Input';
 
@@ -14,8 +14,6 @@ interface ShareModalProps {
 function ShareModal({ isOpen, onClose, listId, listName, sharedWith, onShareEmail }: ShareModalProps) {
   const [email, setEmail] = useState('');
   const [copyMessage, setCopyMessage] = useState('');
-
-  // Build the shareable link using the list's own id
   const shareLink = window.location.origin + '/shared/' + listId;
 
   function handleEmailShare(e: React.FormEvent) {
@@ -30,21 +28,22 @@ function ShareModal({ isOpen, onClose, listId, listName, sharedWith, onShareEmai
   async function handleCopyLink() {
     await navigator.clipboard.writeText(shareLink);
     setCopyMessage('Link copied!');
+    
     setTimeout(function () {
       setCopyMessage('');
     }, 2000);
   }
 
   async function handleNativeShare() {
-    // Not every browser supports the native share sheet, so we check first
-    if (navigator.share) {
+    
+    if (navigator.share !== null && navigator.share !== undefined) {
       await navigator.share({
         title: listName,
         text: 'Check out my shopping list: ' + listName,
         url: shareLink,
       });
     } else {
-      // Fall back to copying the link if native share isn't available
+
       handleCopyLink();
     }
   }
@@ -53,15 +52,18 @@ function ShareModal({ isOpen, onClose, listId, listName, sharedWith, onShareEmai
     return null;
   }
 
+  let copyButtonText = 'Copy Link';
+  if (copyMessage !== '') {
+    copyButtonText = copyMessage;
+  }
+
   return (
     <div className="modal-overlay" onClick={onClose}>
       <div className="modal-box" onClick={function (e) { e.stopPropagation(); }}>
 
         <div className="modal-header">
-          <h3>Share "{listName}"</h3>
-          <button className="modal-close" type="button" onClick={onClose}>
-            ✕
-          </button>
+          <h3> Share "{listName}"</h3>
+          <button className="modal-close" type="button" onClick={onClose}>✕</button>
         </div>
 
         <form onSubmit={handleEmailShare}>
@@ -77,6 +79,7 @@ function ShareModal({ isOpen, onClose, listId, listName, sharedWith, onShareEmai
           </Button>
         </form>
 
+        {/* Conditional Rendering: Only show list box if people are already added to it */}
         {sharedWith.length > 0 ? (
           <div style={{ marginTop: '15px' }}>
             <label>Already shared with:</label>
@@ -90,7 +93,7 @@ function ShareModal({ isOpen, onClose, listId, listName, sharedWith, onShareEmai
 
         <div style={{ display: 'flex', gap: '0.8rem', marginTop: '1.5rem' }}>
           <Button type="button" variant="outline" onClick={handleCopyLink}>
-            {copyMessage || 'Copy Link'}
+            {copyButtonText}
           </Button>
           <Button type="button" variant="outline" onClick={handleNativeShare}>
             Share via...
