@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate, useSearchParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { AppDispatch } from '../Store';
+import { AppDispatch, RootState } from '../Store';
 import {
   fetchListItems,
   addShoppingItem,
@@ -31,12 +31,14 @@ function ListDetail() {
   const dispatch = useDispatch<AppDispatch>();
   const [searchParams, setSearchParams] = useSearchParams();
 
+  // Extract list array metrics using our student-friendly selectors
   const items = useSelector(selectFilteredItems);
   const loading = useSelector(selectLoading);
   const searchTerm = useSelector(selectSearchTerm);
   const sortBy = useSelector(selectSortBy);
   const sortOrder = useSelector(selectSortOrder);
 
+  // Local state tracking boxes for our data structures and modal toggles
   const [list, setList] = useState<ShoppingList | null>(null);
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [editingItem, setEditingItem] = useState<any>(null);
@@ -44,28 +46,35 @@ function ListDetail() {
   const [itemQuantity, setItemQuantity] = useState('1');
   const [isShareOpen, setIsShareOpen] = useState(false);
 
+  // Sync with json-server database via fetch helper when the page loads
   useEffect(function () {
     async function loadList() {
-      if (!id) {
+      if (id === null || id === undefined || id === '') {
         return;
       }
       const response = await getShoppingList(id);
-      setList(response.data as ShoppingList);
+      if (response !== null && response !== undefined) {
+        setList(response.data as ShoppingList);
+      }
     }
+    
     loadList();
-    if (id) {
+    
+    if (id !== null && id !== undefined && id !== '') {
       dispatch(fetchListItems(id));
     }
   }, [id, dispatch]);
 
-    useEffect(function () {
+  // Synchronize searching parameters directly with the URL search metrics
+  useEffect(function () {
     const urlSearch = searchParams.get('search') || '';
     const urlSort = searchParams.get('sort') || 'createdAt';
     const urlOrder = searchParams.get('order') || 'desc';
+    
     dispatch(setSearchTerm(urlSearch));
     dispatch(setSortBy(urlSort));
     dispatch(setSortOrder(urlOrder));
-  }, [searchParams]);
+  }, [searchParams, dispatch]);
 
   function handleSearchChange(e: React.ChangeEvent<HTMLInputElement>) {
     const newValue = e.target.value;
@@ -99,13 +108,14 @@ function ListDetail() {
     setIsFormOpen(true);
   }
 
+  // Handle addition and updates via dispatching payload updates to Redux actions
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    if (!id) {
+    if (id === null || id === undefined || id === '') {
       return;
     }
 
-        if (editingItem && list) {
+    if (editingItem !== null && editingItem !== undefined && list !== null) {
       await dispatch(editShoppingItem({
         id: editingItem.id,
         data: { name: itemName.trim(), quantity: Number(itemQuantity) || 1 },
@@ -122,24 +132,29 @@ function ListDetail() {
     setIsFormOpen(false);
   }
 
-    async function handleDelete(itemId: string) {
+  async function handleDelete(itemId: string) {
     const confirmation = window.confirm('Delete this item?');
-    if (confirmation === true && list) {
+    if (confirmation === true && list !== null && list !== undefined) {
       await dispatch(removeShoppingItem({ id: itemId, currentUserId: list.userId }));
     }
   }
 
   function handleToggle(item: any) {
-    dispatch(toggleItemCompleted({ id: item.id, completed: !item.completed }));
+    let targetCompletion = true;
+    if (item.completed === true) {
+      targetCompletion = false;
+    }
+    dispatch(toggleItemCompleted({ id: item.id, completed: targetCompletion }));
   }
 
   function handleShareEmail(email: string) {
-    if (list) {
+    if (list !== null && list !== undefined) {
       dispatch(shareShoppingList({ id: list.id, email: email, currentSharedWith: list.sharedWith }));
     }
   }
 
-  if (!list) {
+  // Loading box placeholder state view
+  if (list === null || list === undefined) {
     return (
       <PageLayout>
         <div className="loading">Loading list...</div>
@@ -151,7 +166,8 @@ function ListDetail() {
     <PageLayout>
       <div className="page-header">
         <div>
-          <Button variant="outline" size="sm" onClick={function () { navigate('/'); }}>← Back to Dashboard</Button>
+          {/* Direct link points back cleanly onto your student dashboard router view path */}
+          <Button variant="outline" size="sm" onClick={function () { navigate('/home'); }}>← Back to Dashboard</Button>
           <h1>{list.name}</h1>
           <span className="tag">{list.category}</span>
         </div>
@@ -187,7 +203,10 @@ function ListDetail() {
         </div>
       </div>
 
-      {loading ? <div className="loading">Loading items...</div> : null}
+      {/* Conditional Rendering: Show loading status banner text explicitly only if true */}
+      {loading === true ? (
+        <div className="loading">Loading items...</div>
+      ) : null}
 
       <div className="list-grid">
         {items.map(function (item) {
@@ -195,7 +214,7 @@ function ListDetail() {
             <div className="list-item-card" key={item.id}>
               <label style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
                 <input type="checkbox" checked={item.completed} onChange={function () { handleToggle(item); }} />
-                <span style={{ textDecoration: item.completed ? 'line-through' : 'none' }}>
+                <span style={{ textDecoration: item.completed === true ? 'line-through' : 'none' }}>
                   {item.name}
                 </span>
               </label>
@@ -211,11 +230,12 @@ function ListDetail() {
         })}
       </div>
 
-      {isFormOpen ? (
+      {/* Conditional Rendering: Open list update modal forms explicitly only when toggled true */}
+      {isFormOpen === true ? (
         <div className="modal-overlay" onClick={function () { setIsFormOpen(false); }}>
           <div className="modal-box" onClick={function (e) { e.stopPropagation(); }}>
             <div className="modal-header">
-              <h3>{editingItem ? 'Edit Item' : 'New Item'}</h3>
+              <h3>{editingItem !== null ? 'Edit Item' : 'New Item'}</h3>
               <button className="modal-close" type="button" onClick={function () { setIsFormOpen(false); }}>✕</button>
             </div>
             <form onSubmit={handleSubmit}>

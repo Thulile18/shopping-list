@@ -9,41 +9,52 @@ import Profile from './Components/Pages/Profile';
 import SharedList from './Components/Pages/SharedList';
 import Landing from './Components/Pages/Landing';
 import ListDetail from './Components/Pages/ListDetail';
+
 function App() {
-  const { token } = useSelector((state: RootState) => state.auth);
+  
+  const { token } = useSelector(function (state: RootState) {
+    return state.auth;
+  });
+  
   const isLoggedIn = Boolean(token);
+
   return (
     <div className="app-container">
+      {/* Global application navigation banner header */}
       <Navbar />
       
       <Routes>
         {/* Main Base Path: Everyone who opens the app lands here first */}
         <Route path="/" element={<Landing />} />
-        {/* Auth Paths */}
+        
+        {/* Authentication Routes */}
         <Route
           path="/login"
-          element={isLoggedIn ? <Navigate to="/home" replace /> : <Login />}
+          element={isLoggedIn === true ? <Navigate to="/home" replace /> : <Login />}
         />
         <Route
           path="/register"
-          element={isLoggedIn ? <Navigate to="/home" replace /> : <Register />}
+          element={isLoggedIn === true ? <Navigate to="/home" replace /> : <Register />}
         />
+        
         {/* Protected Dashboard/Shopping List View */}
         <Route
           path="/home"
-          element={isLoggedIn ? <Home /> : <Navigate to="/login" replace />}
+          element={isLoggedIn === true ? <Home /> : <Navigate to="/login" replace />}
         />
         
         <Route
           path="/profile"
-          element={isLoggedIn ? <Profile /> : <Navigate to="/login" replace />}
+          element={isLoggedIn === true ? <Profile /> : <Navigate to="/login" replace />}
         />
 
+        {/* Individual Selected List Details Page View Route */}
         <Route
           path="/lists/:id"
-          element={isLoggedIn ? <ListDetail /> : <Navigate to="/login" replace />}
+          element={isLoggedIn === true ? <ListDetail /> : <Navigate to="/login" replace />}
         />
 
+        {/* Read-Only Shared List Component Link Route */}
         <Route path="/shared/:id" element={<SharedList />} />
         
         {/* Fallback Catch-All Redirect */}
@@ -52,4 +63,5 @@ function App() {
     </div>
   );
 }
+
 export default App;
