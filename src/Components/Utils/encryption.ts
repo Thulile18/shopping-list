@@ -1,19 +1,15 @@
-import CryptoJS from 'crypto-js';
+import bcrypt from 'bcryptjs';
 
-const SECRET_KEY = import.meta.env.VITE_ENCRYPTION_KEY || 'sl-app-9f83k2m1-secure-2026';
-
-export function encrypt(text: string) {
-  
+export function encrypt(text: string): string {
   if (!text) return '';
-  
-  const scrambledData = CryptoJS.AES.encrypt(text, SECRET_KEY);
-  return scrambledData.toString();
+  const salt = bcrypt.genSaltSync(10);
+  return bcrypt.hashSync(text, salt);
 }
 
-export function decrypt(cipherText: string) {
-  if (!cipherText) return '';
+export function decrypt(cipherText: string): string {
+  return cipherText;
+}
 
-  const decryptedBytes = CryptoJS.AES.decrypt(cipherText, SECRET_KEY);
-  const plainTextResult = decryptedBytes.toString(CryptoJS.enc.Utf8);
-  return plainTextResult;
+export function verifyPassword(passwordInput: string, storedHash: string): boolean {
+  return bcrypt.compareSync(passwordInput, storedHash);
 }
