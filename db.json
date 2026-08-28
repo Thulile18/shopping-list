@@ -1,105 +1,7 @@
 {
-  "users": [
-    {
-      "email": "mancane@gmail.com",
-      "password": "U2FsdGVkX1+rObjMfSmdVHMgwNP7PKeTmwSaI9cugkg=",
-      "name": "Mancane",
-      "surname": "Gates",
-      "cellNumber": "0618044825",
-      "id": "s3qoE74dbzE"
-    },
-    {
-      "email": "siya@gmail.com",
-      "password": "U2FsdGVkX1/AvXp67V2fnf/XPhDLeKUheG3RF+AAncc=",
-      "name": "Siya",
-      "surname": "Gwamanda",
-      "cellNumber": "0656753453",
-      "id": "B8aH1ja359c"
-    },
-    {
-      "email": "bill@gmail.com",
-      "password": "U2FsdGVkX19RbHfqVb+C41mhOIMJzzemCB2Nz0Z5Ino=",
-      "name": "Bill",
-      "surname": "Davide",
-      "cellNumber": "0738762340",
-      "id": "Qh8jnY1rM58"
-    },
-    {
-      "email": "gwamandasiyamthanda13@gmail.com",
-      "password": "U2FsdGVkX18elJXBJ7oksOpQw6qx3noh8spXlJdAO7A=",
-      "name": "siya",
-      "surname": "gwamanda",
-      "cellNumber": "0123456789",
-      "id": "M5kK4EBLgtw"
-    }
-  ],
-  "shoppingLists": [
-    {
-      "userId": "s3qoE74dbzE",
-      "name": "milk",
-      "quantity": 1,
-      "notes": "farm fresh",
-      "category": "Groceries",
-      "image": "",
-      "createdAt": "2026-08-27T10:05:28.331Z",
-      "sharedWith": [],
-      "id": "m3cup-CGmbI"
-    },
-    {
-      "userId": "s3qoE74dbzE",
-      "name": "eggs",
-      "quantity": 1,
-      "notes": "fresh",
-      "category": "Groceries",
-      "image": "",
-      "createdAt": "2026-08-27T11:13:18.907Z",
-      "sharedWith": [],
-      "id": "RLatMEElHlY"
-    },
-    {
-      "userId": "M5kK4EBLgtw",
-      "name": "Cleaning Items",
-      "quantity": 2,
-      "notes": "Dishwasher",
-      "category": "Home",
-      "image": "",
-      "createdAt": "2026-08-27T13:32:58.654Z",
-      "sharedWith": [],
-      "id": "0Y56ILs7bFc"
-    }
-  ],
-  "shoppingItems": [
-    {
-      "listId": "list-1",
-      "name": "Bread",
-      "quantity": 5,
-      "notes": "Get the whole wheat brown bread version if available",
-      "category": "Groceries",
-      "image": "https://unsplash.com",
-      "createdAt": "2026-08-26T09:46:50.446Z",
-      "id": "zD1HDGyixn4"
-    },
-    {
-      "listId": "list-1",
-      "name": "Laptop Charger",
-      "quantity": 2,
-      "notes": "Type C fast charger",
-      "category": "Electronics",
-      "image": "https://unsplash.com",
-      "createdAt": "2026-08-26T09:55:12.726Z",
-      "id": "g_xx-S-C_G4"
-    },
-    {
-      "listId": "list-1",
-      "name": "bbsfb",
-      "quantity": 3,
-      "notes": "bs",
-      "category": "Clothing",
-      "image": "https://unsplash.com",
-      "createdAt": "2026-08-27T09:08:10.704Z",
-      "id": "iHI4VlUGx5Y"
-    }
-  ],
+  "users": [],
+  "shoppingLists": [],
+  "shoppingItems": [],
   "categories": [
     {
       "id": "1",
@@ -121,6 +23,5 @@
       "id": "5",
       "name": "Product"
     }
-  ],
-  "$schema": "./node_modules/json-server/schema.json"
+  ]
 }
