@@ -1,10 +1,8 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { AuthState, User, LoginCredentials, RegisterData } from '../Types';
-import { encrypt } from '../Utils/encryption'; 
+import { encrypt, decrypt } from '../Utils/encryption';
 import { getUsers, createUser, updateUser } from '../../API/jsonServer';
 import { RootState } from './index';
-import bcrypt from 'bcryptjs'; 
-
 const initialState: AuthState = {
   user: null,
   token: localStorage.getItem('shopping_token') || null,
@@ -33,11 +31,10 @@ export const loginUser = createAsyncThunk(
         return rejectWithValue('User not found');
       }
 
-      const isPasswordValid = bcrypt.compareSync(credentials.password, user.password);
-      if (isPasswordValid === false) {
+            const decryptedPassword = decrypt(user.password);
+      if (decryptedPassword !== credentials.password) {
         return rejectWithValue('Invalid password');
       }
-
       const token = btoa(user.id + ':' + Date.now());
       localStorage.setItem('shopping_token', token);
       
