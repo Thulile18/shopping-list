@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, Link } from 'react-router-dom';
-import bcrypt from 'bcryptjs'; // 👈 1. Added import for bcrypt hashing
 import { AppDispatch } from '../Store';
 import { registerUser, clearError, selectAuthLoading, selectAuthError } from '../Store/authSlice';
 import Input from '../Input';
@@ -39,14 +38,11 @@ function RegisterForm() {
       return;
     }
 
-    const salt = bcrypt.genSaltSync(10);
-    const hashedPassword = bcrypt.hashSync(password, salt);
-
     const resultAction = await dispatch(registerUser({ 
       name: name, 
       surname: surname, 
       email: email, 
-      password: hashedPassword, 
+      password: password, 
       cellNumber: cellNumber 
     }));
     
@@ -130,7 +126,7 @@ function RegisterForm() {
         </Button>
       </form>
       
-      <div className="divider">or</div>
+      <div className="divider"> or </div>
       
       <p style={{ textAlign: 'center', color: '#718096' }}>
         Already have an account?{' '}
