@@ -1,33 +1,12 @@
 {
-  "users": [
-    {
-      "id": "1",
-      "email": "mancane@gmail.com",
-      "password": "yourpasswordhere"
-    }
-  ],
+  "users": [],
   "shoppingLists": [],
   "shoppingItems": [],
   "categories": [
-    {
-      "id": "1",
-      "name": "Groceries"
-    },
-    {
-      "id": "2",
-      "name": "Electronics"
-    },
-    {
-      "id": "3",
-      "name": "Clothing"
-    },
-    {
-      "id": "4",
-      "name": "Household"
-    },
-    {
-      "id": "5",
-      "name": "Product"
-    }
+    { "id": "1", "name": "Groceries" },
+    { "id": "2", "name": "Electronics" },
+    { "id": "3", "name": "Clothing" },
+    { "id": "4", "name": "Household" },
+    { "id": "5", "name": "Other" }
   ]
 }
