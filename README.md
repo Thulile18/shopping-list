@@ -3,7 +3,7 @@
  
  Project Description:
 
-A shopping list management app built with React, TypeScript, and Redux, where users can register, log in, and organise their shopping into categorised lists (e.g. Groceries, Electronics). Each list can contain multiple items with a name, quantity, and image. Users can search, sort, and filter both their lists and items, and share a list with others via email, a shareable link, or their device's native share options. User passwords are encrypted before being stored and decrypted on login.
+A shopping list management app built with React, TypeScript and Redux, where users can register, log in and organise their shopping into categorised lists (e.g. Groceries, Electronics). Each list can contain multiple items with a name, quantity and image. Users can search, sort and filter both their lists and items and share a list with others via email, a shareable link or their device's native share options. User passwords are encrypted before being stored and decrypted on login.
 
  Tech Stack:
 
