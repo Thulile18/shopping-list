@@ -49,7 +49,7 @@ function Home() {
     }
   }, [currentUser, dispatch]);
 
-    useEffect(function () {
+  useEffect(function () {
     const urlSearch = searchParams.get('search') || '';
     const urlSort = searchParams.get('sort') || 'createdAt';
     const urlOrder = searchParams.get('order') || 'desc';
@@ -139,6 +139,17 @@ function Home() {
     return l.id === shareTargetId;
   });
 
+  // Group the lists by their category, so each category shows as its own section
+  const groupedByCategory: Record<string, typeof lists> = {};
+  lists.forEach(function (list) {
+    const key = list.category.trim() === '' ? 'Uncategorized' : list.category;
+    if (!groupedByCategory[key]) {
+      groupedByCategory[key] = [];
+    }
+    groupedByCategory[key].push(list);
+  });
+  const categoryNames = Object.keys(groupedByCategory).sort();
+
   return (
     <PageLayout>
       <div className="page-header">
@@ -175,29 +186,40 @@ function Home() {
 
       {loading ? <div className="loading">Loading...</div> : null}
 
-      <div className="list-grid">
-        {lists.map(function (list) {
-          return (
-            <div className="list-item-card" key={list.id}>
-              <div className="item-name" onClick={function () { navigate('/lists/' + list.id); }} style={{ cursor: 'pointer' }}>
-                {list.name}
-              </div>
-              <div className="item-meta">
-                <span className="tag">{list.category}</span>
-              </div>
-              {list.notes ? <div className="item-notes">📝 {list.notes}</div> : null}
-              {list.image ? <img src={list.image} alt={list.name} className="item-image" /> : null}
+      {lists.length === 0 ? (
+        <p className="text-muted">No shopping lists yet. Click "+ New List" to create one.</p>
+      ) : null}
 
-              <div className="item-actions" style={{ marginTop: '15px', display: 'flex', gap: '10px' }}>
-                <Button variant="primary" size="sm" onClick={function () { navigate('/lists/' + list.id); }}>Open</Button>
-                <Button variant="warning" size="sm" onClick={function () { openEditForm(list); }}>Edit</Button>
-                <Button variant="outline" size="sm" onClick={function () { setShareTargetId(list.id); }}>Share</Button>
-                <Button variant="danger" size="sm" onClick={function () { handleDelete(list.id); }}>Delete</Button>
-              </div>
+      {categoryNames.map(function (categoryName) {
+        return (
+          <div key={categoryName} style={{ marginBottom: '30px' }}>
+            <h2 style={{ marginBottom: '15px' }}>{categoryName}</h2>
+            <div className="list-grid">
+              {groupedByCategory[categoryName].map(function (list) {
+                return (
+                  <div className="list-item-card" key={list.id}>
+                    <div className="item-name" onClick={function () { navigate('/lists/' + list.id); }} style={{ cursor: 'pointer' }}>
+                      {list.name}
+                    </div>
+                    <div className="item-meta">
+                      <span className="tag">{list.category}</span>
+                    </div>
+                    {list.notes ? <div className="item-notes">📝 {list.notes}</div> : null}
+                    {list.image ? <img src={list.image} alt={list.name} className="item-image" /> : null}
+
+                    <div className="item-actions" style={{ marginTop: '15px', display: 'flex', gap: '10px' }}>
+                      <Button variant="primary" size="sm" onClick={function () { navigate('/lists/' + list.id); }}>Open</Button>
+                      <Button variant="warning" size="sm" onClick={function () { openEditForm(list); }}>Edit</Button>
+                      <Button variant="outline" size="sm" onClick={function () { setShareTargetId(list.id); }}>Share</Button>
+                      <Button variant="danger" size="sm" onClick={function () { handleDelete(list.id); }}>Delete</Button>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
-          );
-        })}
-      </div>
+          </div>
+        );
+      })}
 
       {isFormOpen ? (
         <div className="modal-overlay" onClick={function () { setIsFormOpen(false); }}>
