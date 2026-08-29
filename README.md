@@ -42,22 +42,26 @@ A shopping list management app built with React, TypeScript, and Redux, where us
 
 - Canva UI mockups and moodboard: see the design files in this repository
 
- Folder Structure:
+ 
+Folder Structure:
 
 
-src/
-  API/            → jsonServer.ts (fetch calls to json-server)
-  Components/
-    Auth/         → LoginForm.tsx, RegistrationForm.tsx
-    Hooks/        → useAuth.ts
-    Pages/        → Home.tsx (Dashboard), ListDetail.tsx, Login.tsx, Profile.tsx,
+src:
+  
+API              → jsonServer.ts (fetch calls to json-server)
+  
+Components
+    
+    Auth         → LoginForm.tsx, RegistrationForm.tsx
+    Hooks        → useAuth.ts
+    Pages        → Home.tsx (Dashboard), ListDetail.tsx, Login.tsx, Profile.tsx,
                      Register.tsx, Landing.tsx, SharedList.tsx
-    Profile/      → ProfileInfo.tsx, ProfilePassword.tsx
-    Store/        → authSlice.ts, shoppingSlice.ts, hooks.ts, index.ts
-    Styles/       → global.css
-    Types/        → index.ts
-    Utils/        → encryption.ts
-    (shared UI)   → AuthCard.tsx, Button.tsx, Input.tsx, Navbar.tsx, PageLayout.tsx, ShareModal.tsx
+    Profile      → ProfileInfo.tsx, ProfilePassword.tsx
+    Store        → authSlice.ts, shoppingSlice.ts, hooks.ts, index.ts
+    Styles       → global.css
+    Types        → index.ts
+    Utils       → encryption.ts
+   (shared UI)  → AuthCard.tsx, Button.tsx, Input.tsx, Navbar.tsx, PageLayout.tsx, ShareModal.tsx
   App.tsx
   main.tsx
   vite-env.d.ts
