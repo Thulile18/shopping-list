@@ -31,22 +31,20 @@ function ListDetail() {
   const dispatch = useDispatch<AppDispatch>();
   const [searchParams, setSearchParams] = useSearchParams();
 
-  // Extract list array metrics using our student-friendly selectors
   const items = useSelector(selectFilteredItems);
   const loading = useSelector(selectLoading);
   const searchTerm = useSelector(selectSearchTerm);
   const sortBy = useSelector(selectSortBy);
   const sortOrder = useSelector(selectSortOrder);
 
-  // Local state tracking boxes for our data structures and modal toggles
   const [list, setList] = useState<ShoppingList | null>(null);
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [editingItem, setEditingItem] = useState<any>(null);
   const [itemName, setItemName] = useState('');
   const [itemQuantity, setItemQuantity] = useState('1');
+  const [itemImage, setItemImage] = useState('');
   const [isShareOpen, setIsShareOpen] = useState(false);
 
-  // Sync with json-server database via fetch helper when the page loads
   useEffect(function () {
     async function loadList() {
       if (id === null || id === undefined || id === '') {
@@ -65,7 +63,6 @@ function ListDetail() {
     }
   }, [id, dispatch]);
 
-  // Synchronize searching parameters directly with the URL search metrics
   useEffect(function () {
     const urlSearch = searchParams.get('search') || '';
     const urlSort = searchParams.get('sort') || 'createdAt';
@@ -98,6 +95,7 @@ function ListDetail() {
     setEditingItem(null);
     setItemName('');
     setItemQuantity('1');
+    setItemImage('');
     setIsFormOpen(true);
   }
 
@@ -105,10 +103,10 @@ function ListDetail() {
     setEditingItem(item);
     setItemName(item.name);
     setItemQuantity(String(item.quantity));
+    setItemImage(item.image || '');
     setIsFormOpen(true);
   }
 
-  // Handle addition and updates via dispatching payload updates to Redux actions
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (id === null || id === undefined || id === '') {
@@ -118,7 +116,7 @@ function ListDetail() {
     if (editingItem !== null && editingItem !== undefined && list !== null) {
       await dispatch(editShoppingItem({
         id: editingItem.id,
-        data: { name: itemName.trim(), quantity: Number(itemQuantity) || 1 },
+        data: { name: itemName.trim(), quantity: Number(itemQuantity) || 1, image: itemImage.trim() },
         currentUserId: list.userId,
       }));
     } else {
@@ -126,6 +124,7 @@ function ListDetail() {
         listId: id,
         name: itemName.trim(),
         quantity: Number(itemQuantity) || 1,
+        image: itemImage.trim(),
         completed: false,
       }));
     }
@@ -153,7 +152,6 @@ function ListDetail() {
     }
   }
 
-  // Loading box placeholder state view
   if (list === null || list === undefined) {
     return (
       <PageLayout>
@@ -166,7 +164,6 @@ function ListDetail() {
     <PageLayout>
       <div className="page-header">
         <div>
-          {/* Direct link points back cleanly onto your student dashboard router view path */}
           <Button variant="outline" size="sm" onClick={function () { navigate('/home'); }}>← Back to Dashboard</Button>
           <h1>{list.name}</h1>
           <span className="tag">{list.category}</span>
@@ -203,7 +200,6 @@ function ListDetail() {
         </div>
       </div>
 
-      {/* Conditional Rendering: Show loading status banner text explicitly only if true */}
       {loading === true ? (
         <div className="loading">Loading items...</div>
       ) : null}
@@ -221,6 +217,9 @@ function ListDetail() {
               <div className="item-meta">
                 <span> Qty: {item.quantity}</span>
               </div>
+              {item.image ? (
+                <img src={item.image} alt={item.name} className="item-image" />
+              ) : null}
               <div className="item-actions" style={{ marginTop: '15px', display: 'flex', gap: '10px' }}>
                 <Button variant="warning" size="sm" onClick={function () { openEditForm(item); }}>Edit</Button>
                 <Button variant="danger" size="sm" onClick={function () { handleDelete(item.id); }}>Delete</Button>
@@ -230,7 +229,6 @@ function ListDetail() {
         })}
       </div>
 
-      {/* Conditional Rendering: Open list update modal forms explicitly only when toggled true */}
       {isFormOpen === true ? (
         <div className="modal-overlay" onClick={function () { setIsFormOpen(false); }}>
           <div className="modal-box" onClick={function (e) { e.stopPropagation(); }}>
@@ -241,6 +239,7 @@ function ListDetail() {
             <form onSubmit={handleSubmit}>
               <Input label="Item Name" value={itemName} onChange={function (e) { setItemName(e.target.value); }} required />
               <Input label="Quantity" type="number" min="1" value={itemQuantity} onChange={function (e) { setItemQuantity(e.target.value); }} required />
+              <Input label="Image URL (optional)" value={itemImage} onChange={function (e) { setItemImage(e.target.value); }} placeholder="https://..." />
               <Button type="submit" variant="primary" block>Save</Button>
             </form>
           </div>
