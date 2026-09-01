@@ -18,6 +18,7 @@ import {
   selectSortOrder,
 } from '../Store/shoppingSlice';
 import { selectUser } from '../Store/authSlice';
+import { guessCategory } from '../Utils/autoCategory';
 import PageLayout from '../PageLayout';
 import Button from '../Button';
 import Input from '../Input';
@@ -42,6 +43,7 @@ function Home() {
   const [notes, setNotes] = useState('');
   const [image, setImage] = useState('');
   const [shareTargetId, setShareTargetId] = useState<string | null>(null);
+  const [categoryWasManuallyChanged, setCategoryWasManuallyChanged] = useState(false);
 
   useEffect(function () {
     if (currentUser) {
@@ -82,6 +84,7 @@ function Home() {
     setCategory('');
     setNotes('');
     setImage('');
+    setCategoryWasManuallyChanged(false);
     setIsFormOpen(true);
   }
 
@@ -91,7 +94,26 @@ function Home() {
     setCategory(list.category);
     setNotes(list.notes);
     setImage(list.image);
+    setCategoryWasManuallyChanged(true);
     setIsFormOpen(true);
+  }
+
+  function handleNameChange(e: React.ChangeEvent<HTMLInputElement>) {
+    const newName = e.target.value;
+    setName(newName);
+
+    // Only auto-guess the category if the user hasn't picked one themselves yet
+    if (categoryWasManuallyChanged === false) {
+      const guessedCategory = guessCategory(newName);
+      if (guessedCategory !== '') {
+        setCategory(guessedCategory);
+      }
+    }
+  }
+
+  function handleCategoryChange(e: React.ChangeEvent<HTMLInputElement>) {
+    setCategory(e.target.value);
+    setCategoryWasManuallyChanged(true);
   }
 
   async function handleSubmit(e: React.FormEvent) {
@@ -229,8 +251,8 @@ function Home() {
               <button className="modal-close" type="button" onClick={function () { setIsFormOpen(false); }}>✕</button>
             </div>
             <form onSubmit={handleSubmit}>
-              <Input label="List Name" value={name} onChange={function (e) { setName(e.target.value); }} required />
-              <Input label="Category" value={category} onChange={function (e) { setCategory(e.target.value); }} required />
+              <Input label="List Name" value={name} onChange={handleNameChange} required />
+              <Input label="Category (auto-suggested, editable)" value={category} onChange={handleCategoryChange} required />
               <Input label="Notes (optional)" value={notes} onChange={function (e) { setNotes(e.target.value); }} />
               <Input label="Image URL (optional)" value={image} onChange={function (e) { setImage(e.target.value); }} />
               <Button type="submit" variant="primary" block>Save</Button>
