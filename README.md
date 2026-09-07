@@ -1,8 +1,8 @@
           Shopping List App
-
  
- Project Image:
+  Project Image:
    
+<img width="1919" height="952" alt="Shopping List" src="https://github.com/user-attachments/assets/1258c1d5-e910-4f50-9b49-04278729d5d4" />
 
  
  Project Description:
