@@ -1,68 +1,12 @@
 {
-  "users": [
-    {
-      "email": "joe@gmail.com",
-      "password": "U2FsdGVkX1/gnlTuNUGEw1C32RPNVqdwwwh8OU1y7Mk=",
-      "name": "Joe",
-      "surname": "Don",
-      "cellNumber": "0618044825",
-      "id": "-CmCBlnpmw0"
-    }
-  ],
-  "shoppingLists": [
-    {
-      "userId": "-CmCBlnpmw0",
-      "name": "Weekly milk and bread",
-      "category": "Groceries",
-      "notes": "",
-      "image": "https://recipe.sfo3.digitaloceanspaces.com/images/how-to-make-soft-milk-bread-at-home-105229-featured_1_0.jpg",
-      "createdAt": "2026-09-01T11:12:04.746Z",
-      "sharedWith": [],
-      "id": "kCNi4itHbF8"
-    },
-    {
-      "userId": "-CmCBlnpmw0",
-      "name": "charger",
-      "category": "Electronics",
-      "notes": "",
-      "image": "https://th.bing.com/th?id=OPEC.UOiY7qPG%2fG6Q7g474C474&w=200&h=220&rs=1&r=0&o=5&pid=21.1",
-      "createdAt": "2026-09-01T11:15:23.961Z",
-      "sharedWith": [],
-      "id": "8XBrZyBn5Ls"
-    },
-    {
-      "userId": "-CmCBlnpmw0",
-      "name": "rice",
-      "category": "Groceries",
-      "notes": "",
-      "image": "https://th.bing.com/th/id/OIP.FVOVRQjgVThP4VHlB156hgHaE7?w=266&h=180&c=7&r=0&o=7&pid=1.7&rm=3",
-      "createdAt": "2026-09-01T11:17:11.393Z",
-      "sharedWith": [],
-      "id": "ItRprmJYD0k"
-    }
-  ],
+  "users": [],
+  "shoppingLists": [],
   "shoppingItems": [],
   "categories": [
-    {
-      "id": "1",
-      "name": "Groceries"
-    },
-    {
-      "id": "2",
-      "name": "Electronics"
-    },
-    {
-      "id": "3",
-      "name": "Clothing"
-    },
-    {
-      "id": "4",
-      "name": "Household"
-    },
-    {
-      "id": "5",
-      "name": "Other"
-    }
-  ],
-  "$schema": "./node_modules/json-server/schema.json"
+    { "id": "1", "name": "Groceries" },
+    { "id": "2", "name": "Electronics" },
+    { "id": "3", "name": "Clothing" },
+    { "id": "4", "name": "Household" },
+    { "id": "5", "name": "Other" }
+  ]
 }
