@@ -1,12 +1,75 @@
 {
-  "users": [],
-  "shoppingLists": [],
-  "shoppingItems": [],
+  "users": [
+    {
+      "email": "sabelo@gmail.com",
+      "password": "U2FsdGVkX18PXbcVCcsEu4j9Zx7j58DqEGbap5ZdPKc=",
+      "name": "Sabelo",
+      "surname": "Sabz",
+      "cellNumber": "0618044825",
+      "id": "nNVa55O-2FE"
+    }
+  ],
+  "shoppingLists": [
+    {
+      "userId": "nNVa55O-2FE",
+      "name": "Groceries",
+      "category": "Groceries",
+      "notes": "Monthly Restock",
+      "image": "hwhsyrhfrttrt",
+      "createdAt": "2026-09-09T12:27:24.241Z",
+      "sharedWith": [],
+      "id": "TyiIN3_v_tA"
+    },
+    {
+      "userId": "nNVa55O-2FE",
+      "name": "Electronics",
+      "category": "Electronics",
+      "notes": "",
+      "image": "",
+      "createdAt": "2026-09-09T12:41:10.535Z",
+      "sharedWith": [],
+      "id": "QgoiTNsV5uk"
+    }
+  ],
+  "shoppingItems": [
+    {
+      "listId": "TyiIN3_v_tA",
+      "name": "Apples",
+      "quantity": 2,
+      "completed": false,
+      "createdAt": "2026-09-09T12:28:24.617Z",
+      "id": "Vcbyib5Yr28"
+    },
+    {
+      "listId": "QgoiTNsV5uk",
+      "name": "Charger",
+      "quantity": 1,
+      "completed": false,
+      "createdAt": "2026-09-09T12:41:39.816Z",
+      "id": "hwSEoA3YNCE"
+    }
+  ],
   "categories": [
-    { "id": "1", "name": "Groceries" },
-    { "id": "2", "name": "Electronics" },
-    { "id": "3", "name": "Clothing" },
-    { "id": "4", "name": "Household" },
-    { "id": "5", "name": "Other" }
-  ]
+    {
+      "id": "1",
+      "name": "Groceries"
+    },
+    {
+      "id": "2",
+      "name": "Electronics"
+    },
+    {
+      "id": "3",
+      "name": "Clothing"
+    },
+    {
+      "id": "4",
+      "name": "Household"
+    },
+    {
+      "id": "5",
+      "name": "Other"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
 }
