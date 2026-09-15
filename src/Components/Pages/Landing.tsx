@@ -37,6 +37,32 @@ function Landing() {
           <p> Share a list by email, link or your device's native share options. </p>
         </div>
       </section>
+
+      <section className="landing-how-it-works">
+        <h2>How It Works</h2>
+        <div className="how-it-works-grid">
+          <div className="step-card">
+            <div className="step-number">1</div>
+            <h3>Create an account</h3>
+            <p>Register with your email and a few details, then sign in securely.</p>
+          </div>
+          <div className="step-card">
+            <div className="step-number">2</div>
+            <h3>Build your lists</h3>
+            <p>Group items into categories like Groceries or Electronics, each with quantity, notes, and an image.</p>
+          </div>
+          <div className="step-card">
+            <div className="step-number">3</div>
+            <h3>Search, sort & share</h3>
+            <p>Find what you need instantly, and share any list with family or housemates.</p>
+          </div>
+        </div>
+      </section>
+
+      <footer className="landing-footer">
+        <span className="landing-icon-small">🛒</span>
+        <p>Shopping List App — built with React, TypeScript, and Redux.</p>
+      </footer>
     </div>
   );
 }

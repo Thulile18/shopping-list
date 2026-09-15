@@ -1,7 +1,6 @@
           Shopping List App
-
  
- Project Image:
+  Project Image/Socialify:
    
 <img src="https://socialify.git.ci/Thulile18/shopping-list/image?language=1&owner=1&name=1&stargazers=1&theme=Light" alt="shopping-list" width="640" height="320" />
 
