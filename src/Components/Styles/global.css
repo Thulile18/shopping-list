@@ -533,11 +533,11 @@ textarea {
 }
 
 .landing-features {
-  max-width: 900px;
+  max-width: 1200px;
   margin: 0 auto 60px;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
 }
 
 .feature-card {
