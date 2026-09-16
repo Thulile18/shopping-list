@@ -663,6 +663,10 @@ textarea {
   .list-grid {
     grid-template-columns: 1fr;
   }
+  .landing-features {
+  grid-template-columns: 1fr;
+}
+
   .filters-bar {
     flex-direction: column;
     align-items: stretch;
