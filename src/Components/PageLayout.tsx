@@ -6,10 +6,11 @@ interface PageLayoutProps {
 
 function PageLayout({ children }: PageLayoutProps) {
   return (
-    <div className="container" style={{ padding: '2rem 0' }}>
-      {/* Dynamic Content Layout Wrapper */}
-      {children}
-    </div>
+    <main className="dashboard-main">
+      <div className="dashboard-content">
+        {children}
+      </div>
+    </main>
   );
 }
 
