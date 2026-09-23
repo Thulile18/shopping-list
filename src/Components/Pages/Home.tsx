@@ -198,13 +198,13 @@ function Home() {
   function handleNameChange(
     e: React.ChangeEvent<HTMLInputElement>
   ) {
-    const newName = e.target.value;
+    const newValue = e.target.value;
 
-    setName(newName);
+    setName(newValue);
 
     if (categoryWasManuallyChanged === false) {
       const guessedCategory =
-        guessCategory(newName);
+        guessCategory(newValue);
 
       if (guessedCategory !== '') {
         setCategory(guessedCategory);
@@ -744,16 +744,9 @@ function Home() {
                       in this category
                     </span>
 
-                    <button
-                      type="button"
-                      onClick={
-                        function () {
-                          navigate('/home');
-                        }
-                      }
-                    >
-                      View all →
-                    </button>
+                    <span className="category-footer-hint">
+                      Keep shopping organised
+                    </span>
 
                   </div>
 

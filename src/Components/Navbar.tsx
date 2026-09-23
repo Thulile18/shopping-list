@@ -11,7 +11,9 @@ function Navbar() {
 
   const [menuOpen, setMenuOpen] = useState(false);
 
-  const { user, token } = useSelector((state: RootState) => state.auth);
+  const { user, token } = useSelector(
+    (state: RootState) => state.auth
+  );
 
   function handleLogout() {
     dispatch(logout());
@@ -28,7 +30,10 @@ function Navbar() {
     userInitial = user.name[0].toUpperCase();
   }
 
-  const userName = user && user.name ? user.name : 'User';
+  const userName =
+    user && user.name
+      ? user.name
+      : 'User';
 
   function closeMenu() {
     setMenuOpen(false);
@@ -43,15 +48,22 @@ function Navbar() {
         }
       >
         <div className="sidebar-brand">
-          <span className="sidebar-brand-icon"> 🛒 </span>
+          <span className="sidebar-brand-icon">
+            🛒
+          </span>
 
           <div>
-            <strong> Shopping List </strong>
-            <span> Plan • Organize • Shop • Save </span>
+            <strong>Shopping List</strong>
+
+            <span>
+              Plan • Organize • Shop • Save
+            </span>
           </div>
         </div>
 
         <nav className="sidebar-nav">
+
+          {/* Home */}
           <Link
             to="/home"
             onClick={closeMenu}
@@ -65,11 +77,13 @@ function Navbar() {
             Home
           </Link>
 
+          {/* Lists */}
           <Link
-            to="/home"
+            to="/lists"
             onClick={closeMenu}
             className={
-              location.pathname.startsWith('/lists')
+              location.pathname === '/lists' ||
+              location.pathname.startsWith('/lists/')
                 ? 'sidebar-link active'
                 : 'sidebar-link'
             }
@@ -78,6 +92,7 @@ function Navbar() {
             Lists
           </Link>
 
+          {/* Profile */}
           <Link
             to="/profile"
             onClick={closeMenu}
@@ -90,16 +105,21 @@ function Navbar() {
             <span>♟</span>
             Profile
           </Link>
+
         </nav>
 
         <div className="sidebar-bottom">
-          <div className="sidebar-bottom-icon">♡</div>
+
+          <div className="sidebar-bottom-icon">
+            ♡
+          </div>
 
           <p>
             Smart lists.
             <br />
             Better shopping.
           </p>
+
         </div>
       </aside>
 
@@ -111,7 +131,9 @@ function Navbar() {
       ) : null}
 
       <header className="dashboard-topbar">
+
         <div className="topbar-left">
+
           <button
             type="button"
             className="menu-button"
@@ -123,17 +145,25 @@ function Navbar() {
             ☰
           </button>
 
-          <Link to="/home" className="topbar-brand">
+          <Link
+            to="/home"
+            className="topbar-brand"
+          >
             <span>🛒</span>
 
             <div>
               <strong>Shopping List</strong>
-              <small>Plan • Organize • Shop • Save</small>
+
+              <small>
+                Plan • Organize • Shop • Save
+              </small>
             </div>
           </Link>
+
         </div>
 
         <div className="topbar-actions">
+
           <span className="notification-icon">
             ♧
             <span></span>
@@ -148,7 +178,7 @@ function Navbar() {
           </span>
 
           <span className="topbar-chevron">
-            
+            ▾
           </span>
 
           <button
@@ -158,7 +188,9 @@ function Navbar() {
           >
             ↪ Logout
           </button>
+
         </div>
+
       </header>
     </>
   );

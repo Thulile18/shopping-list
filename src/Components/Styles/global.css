@@ -43,7 +43,6 @@ textarea {
   background: #f5f8fd;
 }
 
-
 /* =========================
    BUTTONS
 ========================= */
@@ -109,7 +108,6 @@ textarea {
   width: 100%;
 }
 
-
 /* =========================
    FORMS
 ========================= */
@@ -150,7 +148,6 @@ textarea {
   margin-top: 5px;
 }
 
-
 /* =========================
    GENERAL CARDS
 ========================= */
@@ -175,7 +172,6 @@ textarea {
   font-weight: bold;
   color: #1a1a2e;
 }
-
 
 /* =========================
    AUTHENTICATION
@@ -251,7 +247,6 @@ textarea {
   background: #dcfce7;
   color: #166534;
 }
-
 
 /* =========================
    DESKTOP SIDEBAR
@@ -347,7 +342,6 @@ textarea {
   font-size: 12px;
   line-height: 1.45;
 }
-
 
 /* =========================
    TOP HEADER
@@ -460,7 +454,6 @@ textarea {
   display: none;
 }
 
-
 /* =========================
    MAIN DASHBOARD
 ========================= */
@@ -484,7 +477,6 @@ textarea {
   margin: 0 auto;
   padding: 28px 34px 45px;
 }
-
 
 /* =========================
    HOME HERO
@@ -581,7 +573,6 @@ textarea {
   display: block;
 }
 
-
 /* =========================
    FILTER BAR
 ========================= */
@@ -654,6 +645,74 @@ textarea {
   color: #1a2b50;
 }
 
+/* =========================
+   LIST DETAIL PAGE
+========================= */
+
+.list-detail-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.list-detail-title {
+  min-width: 0;
+}
+
+.list-detail-title h1 {
+  margin-top: 12px;
+  margin-bottom: 7px;
+  color: #1a1a2e;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.list-detail-title .tag {
+  display: inline-block;
+  padding: 5px 10px;
+  border-radius: 14px;
+  background: #edf1ff;
+  color: #4361ee;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.list-detail-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.shopping-item-check {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+  cursor: pointer;
+}
+
+.shopping-item-check input {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+
+.shopping-item-name {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  color: #14264d;
+  font-size: 17px;
+  font-weight: 600;
+}
+
+.shopping-item-name.completed {
+  color: #718096;
+  text-decoration: line-through;
+}
 
 /* =========================
    CATEGORY GRID
@@ -730,7 +789,6 @@ textarea {
   font-weight: bold;
 }
 
-
 /* =========================
    CATEGORY COLOURS
 ========================= */
@@ -745,7 +803,6 @@ textarea {
   color: #16845c;
 }
 
-
 .category-color-1 .category-heading,
 .category-color-1 .category-footer {
   background: #e8ecff;
@@ -755,7 +812,6 @@ textarea {
 .category-color-1 .category-count {
   color: #4259c9;
 }
-
 
 .category-color-2 .category-heading,
 .category-color-2 .category-footer {
@@ -767,7 +823,6 @@ textarea {
   color: #c13b75;
 }
 
-
 .category-color-3 .category-heading,
 .category-color-3 .category-footer {
   background: #fff0df;
@@ -778,7 +833,6 @@ textarea {
   color: #c46b18;
 }
 
-
 .category-color-4 .category-heading,
 .category-color-4 .category-footer {
   background: #e1f7f4;
@@ -788,7 +842,6 @@ textarea {
 .category-color-4 .category-count {
   color: #15857a;
 }
-
 
 /* =========================
    LIST CARD
@@ -885,7 +938,6 @@ textarea {
   margin-top: 14px;
 }
 
-
 /* =========================
    CATEGORY FOOTER
 ========================= */
@@ -907,7 +959,6 @@ textarea {
   color: #365ee0;
   font-weight: 600;
 }
-
 
 /* =========================
    EMPTY STATE
@@ -942,7 +993,6 @@ textarea {
   padding: 40px;
   color: #718096;
 }
-
 
 /* =========================
    PROFILE
@@ -1017,7 +1067,6 @@ textarea {
   width: 100%;
 }
 
-
 /* =========================
    MODALS
 ========================= */
@@ -1062,7 +1111,6 @@ textarea {
   font-size: 24px;
   color: #a0aec0;
 }
-
 
 /* =========================
    LANDING PAGE
@@ -1217,13 +1265,11 @@ textarea {
   border-top: 1px solid #e2e8f0;
 }
 
-
 /* =========================
    RESPONSIVE
 ========================= */
 
 @media (max-width: 1200px) {
-
   .dashboard-content {
     padding-left: 24px;
     padding-right: 24px;
@@ -1238,9 +1284,7 @@ textarea {
   }
 }
 
-
 @media (max-width: 1024px) {
-
   .dashboard-sidebar {
     width: 210px;
   }
@@ -1258,9 +1302,7 @@ textarea {
   }
 }
 
-
 @media (max-width: 768px) {
-
   .dashboard-sidebar {
     width: 250px;
     transform: translateX(-100%);
@@ -1373,11 +1415,24 @@ textarea {
   .landing-features {
     grid-template-columns: 1fr;
   }
+
+  /* LIST DETAIL */
+
+  .list-detail-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .list-detail-actions {
+    width: 100%;
+  }
+
+  .list-detail-actions .btn {
+    flex: 1;
+  }
 }
 
-
 @media (max-width: 480px) {
-
   .dashboard-content {
     padding: 14px 10px 30px;
   }
@@ -1466,6 +1521,18 @@ textarea {
     gap: 10px;
   }
 
+  .list-detail-title h1 {
+    font-size: 23px;
+  }
+
+  .list-detail-actions {
+    flex-direction: column;
+  }
+
+  .list-detail-actions .btn {
+    width: 100%;
+  }
+
   .auth-card {
     padding: 20px;
   }
@@ -1487,9 +1554,7 @@ textarea {
   }
 }
 
-
 @media (max-width: 320px) {
-
   .dashboard-content {
     padding-left: 7px;
     padding-right: 7px;
